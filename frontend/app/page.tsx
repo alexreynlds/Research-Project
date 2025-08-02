@@ -2,9 +2,11 @@
 
 import Navbar from "@/components/navigation/Navbar";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
-export default function home() {
+export default function login() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,6 +14,8 @@ export default function home() {
     e.preventDefault();
     console.log("Username:", username);
     console.log("Password:", password);
+
+    router.push("/dashboard");
   }
 
   return (
