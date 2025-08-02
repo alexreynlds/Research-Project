@@ -28,7 +28,7 @@ export default function login() {
           className="h-10"
         />
         <h1 className="text-xl font-bold">LOGIN</h1>
-        <form className="flex flex-col  w-full h-full" onSubmit={handleLogin}>
+        <form className="flex flex-col w-full h-full" onSubmit={handleLogin}>
           <label className="text-sm text-gray-600">Username</label>
           <input placeholder="Username" className="border-2 p-2 rounded-sm mb-2" onChange={(e) => setUsername(e.target.value)} value={username} />
           <label className="text-sm text-gray-600">Password</label>
@@ -40,9 +40,15 @@ export default function login() {
             </div>
             <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
           </div>
-          <button type="submit" className="mt-auto bg-[#70b664] py-1 px-4 rounded-sm text-white hover:bg-[#5a9b52] transition-colors duration-300 cursor-pointer">
+          <button type="submit" className="bg-[#70b664] py-1 px-4 rounded-sm text-white hover:bg-[#5a9b52] transition-colors duration-300 cursor-pointer">
             Login
           </button>
+          <div className="mt-auto mb-4 flex justify-center w-full">
+            <span className="text-sm text-gray-600">
+              Don't have an account? <a href="/register" className="text-gray-800 font-bold hover:underline hover:text-blue-600">Register Now!</a>
+            </span>
+          </div>
+
         </form>
       </main>
 
