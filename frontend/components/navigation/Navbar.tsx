@@ -12,7 +12,7 @@ export default function Navbar() {
             className="h-10 mt-[-5px]"
           />
         </a>
-        agrids map
+        Agrids Map
       </h1>
       <ul className="flex gap-4 text-lg font-medium items-center">
         <li className="bg-[#70b664] py-1 px-4 rounded-xl text-white hover:bg-[#5a9b52] transition-colors duration-300">
