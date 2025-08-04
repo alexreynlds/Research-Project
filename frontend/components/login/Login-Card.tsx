@@ -34,7 +34,7 @@ export default function LoginCard() {
         </button>
         <div className="mt-auto mb-4 flex justify-center w-full">
           <span className="text-sm text-gray-600">
-            Don't have an account? <a href="/register" className="text-gray-800 font-bold hover:underline hover:text-blue-600">Register Now!</a>
+            Don&apos;t have an account? <a href="/register" className="text-gray-800 font-bold hover:underline hover:text-blue-600">Register Now!</a>
           </span>
         </div>
 

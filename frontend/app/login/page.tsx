@@ -1,4 +1,5 @@
-import LoginCard from "@/components/login/Login";
+import LoginCard from "@/components/login/Login-Card";
+
 
 export const metadata = {
   title: 'Login'

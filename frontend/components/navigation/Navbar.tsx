@@ -1,28 +1,29 @@
 import React from "react";
+import NavbarButton from "./Navbar-Button";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="border-2 p-3 rounded-2xl w-[80%] flex justify-between">
+    <nav className="border-2 p-3 rounded-2xl w-[80%] h-[5rem] flex justify-between">
       <h1 className="flex items-center gap-4 text-3xl font-medium">
-        <a href="/" title="agrids home page">
+        <Link href="/" title="agrids home page">
+          {/* Switch to next/image at somepoint if you can be bothered - sizing is annoying */}
           <img
             src="/img/agrids_logo_transparent_crop.png"
             alt="agrids logo"
             className="h-10 mt-[-5px]"
           />
-        </a>
+        </Link>
         Agrids Map
       </h1>
-      <ul className="flex gap-4 text-lg font-medium items-center">
-        <li className="bg-[#70b664] py-1 px-4 rounded-xl text-white hover:bg-[#5a9b52] transition-colors duration-300">
-          <a href="">home</a>
-        </li>
-        <li className="bg-[#70b664] py-1 px-4 rounded-xl text-white hover:bg-[#5a9b52] transition-colors duration-300">
-          <a href="">login</a>
-        </li>
-        <li className="bg-[#70b664] py-1 px-4 rounded-xl text-white hover:bg-[#5a9b52] transition-colors duration-300">
-          <a href="">register</a>
-        </li>
+      <ul className="flex gap-2 text-lg font-medium items-center">
+        <NavbarButton href="/">Home</NavbarButton>
+        <NavbarButton href="login">View Vineyard</NavbarButton>
+        <NavbarButton href="register">Import</NavbarButton>
+        <NavbarButton href="register">Create</NavbarButton>
+        <NavbarButton href="register">Robotics</NavbarButton>
+        <NavbarButton href="register">Admin Development</NavbarButton>
+        <NavbarButton href="register">Logout</NavbarButton>
       </ul>
     </nav>
   );
