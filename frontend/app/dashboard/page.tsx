@@ -1,4 +1,6 @@
-import Image from "next/image";
+export const metadata = {
+  title: 'Dashboard'
+}
 
 export default function Dashboard() {
   return (
@@ -24,7 +26,6 @@ export default function Dashboard() {
       </nav>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
       </main>
-
     </div>
   );
 }
