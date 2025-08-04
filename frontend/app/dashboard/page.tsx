@@ -9,8 +9,9 @@ export default function Dashboard() {
   return (
     <MainLayout>
       <Navbar />
-      <main className="flex flex-col gap-[32px]row - start - 2 items - center sm: items - start">
-      </main >
+      <div>
+        <p>Welcome to the dashboard for AGRIDS Map!</p>
+      </div>
     </MainLayout>
   );
 }
