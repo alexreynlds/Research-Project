@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarButton from "./Navbar-Button";
+import NavbarButton from "./navbar-button";
 import Link from "next/link";
 
 export default function Navbar() {

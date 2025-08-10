@@ -1,4 +1,4 @@
-import LoginCard from "@/components/login/Login-Card";
+import LoginCard from "@/components/login/login-card";
 
 
 export const metadata = {
