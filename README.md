@@ -27,3 +27,26 @@ npm run dev
 
 Once the server is running, open your browser and go to:
 http://localhost:3000
+
+🖥️ Running the Backend<br/>
+To run the backend of the AGRIDs project locally, follow these steps:
+
+1. Navigate to the Backend Directory
+```bash
+cd backend
+```
+
+2. Enter the Virtual Environment
+```bash
+source /.venv/bin/activate
+```
+
+3. Install Dependencies
+```bash
+pip -r requirements.txt
+```
+
+4. Start the Backend Server
+```bash
+python wsgi.py
+```
