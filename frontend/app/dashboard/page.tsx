@@ -1,19 +1,14 @@
-import ServerConnectionTest from "@/components/backend/server-connection-test";
 import MainLayout from "@/components/layouts/main-layout";
-import Navbar from "@/components/navigation/navbar";
+import DashboardClient from "@/components/page-clients/dashboard-client";
 
 export const metadata = {
-  title: 'Dashboard'
-}
+  title: "Dashboard",
+};
 
 export default function Dashboard() {
   return (
     <MainLayout>
-      <div>
-        <h1>DASHBOARD</h1>
-        <p>Welcome to the dashboard for AGRIDS Map!</p>
-        <ServerConnectionTest />
-      </div>
+      <DashboardClient />
     </MainLayout>
   );
 }

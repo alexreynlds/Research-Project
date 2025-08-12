@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
+from dotenv import load_dotenv
 import sqlite3
 from pathlib import Path
 
 bcrypt = Bcrypt()
+load_dotenv()
 
 DB_PATH = Path(__file__).resolve().parent.parent / "app.db"
 
@@ -28,6 +30,9 @@ def init_db():
     """
     )
 
+    db.commit()
+    db.close()
+
 
 def create_app():
     app = Flask(__name__)
@@ -37,7 +42,11 @@ def create_app():
     )
 
     bcrypt.init_app(app)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(
+        app,
+        supports_credentials=True,
+        resources={r"/api/*": {"origins": "http://localhost:3000"}},
+    )
 
     from .test_functions.test import test_bp
     from .auth.auth import auth_bp

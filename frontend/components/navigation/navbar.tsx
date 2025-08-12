@@ -1,5 +1,6 @@
 import React from "react";
 import NavbarButton from "./navbar-button";
+import LogoutButton from "./logout-button";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -18,14 +19,13 @@ export default function Navbar() {
       </h1>
       <ul className="flex gap-2 text-lg font-medium items-center">
         <NavbarButton href="/dashboard">Home</NavbarButton>
-        <NavbarButton href="/view">View Vineyard</NavbarButton>
-        <NavbarButton href="/import">Import</NavbarButton>
-        <NavbarButton href="/create">Create</NavbarButton>
-        <NavbarButton href="/robotics">Robotics</NavbarButton>
-        <NavbarButton href="/admin">Admin Development</NavbarButton>
-        <NavbarButton href="login" red>Logout</NavbarButton>
+        {/* <NavbarButton href="#view">View Vineyard</NavbarButton> */}
+        {/* <NavbarButton href="/import">Import</NavbarButton> */}
+        {/* <NavbarButton href="/create">Create</NavbarButton> */}
+        {/* <NavbarButton href="/robotics">Robotics</NavbarButton> */}
+        {/* <NavbarButton href="/admin">Admin Development</NavbarButton> */}
+        <LogoutButton />
       </ul>
     </nav>
   );
 }
-
