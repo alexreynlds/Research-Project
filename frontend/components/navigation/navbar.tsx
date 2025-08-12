@@ -23,7 +23,7 @@ export default function Navbar() {
         <NavbarButton href="register">Create</NavbarButton>
         <NavbarButton href="register">Robotics</NavbarButton>
         <NavbarButton href="register">Admin Development</NavbarButton>
-        <NavbarButton href="register">Logout</NavbarButton>
+        <NavbarButton href="login">Logout</NavbarButton>
       </ul>
     </nav>
   );

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function LoginCard() {
   const router = useRouter();
@@ -13,7 +14,31 @@ export default function LoginCard() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    router.push("/dashboard");
+    const data = {
+      username: username,
+      password: password,
+    }
+
+    const response = fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log("Login request sent:", data);
+
+    toast("yippe")
+
+    response.then(res => {
+      if (res.ok) {
+        toast.success("Login successful!");
+        router.push("/dashboard");
+      } else {
+        toast.error("Login failed. Please check your credentials.");
+      }
+    });
   }
 
   const handleCardChange = () => {
