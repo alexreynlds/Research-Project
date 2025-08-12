@@ -3,16 +3,14 @@ import MainLayout from "@/components/layouts/main-layout";
 import Navbar from "@/components/navigation/navbar";
 
 export const metadata = {
-  title: 'Dashboard'
+  title: 'View'
 }
 
 export default function Dashboard() {
   return (
     <MainLayout>
       <div>
-        <h1>DASHBOARD</h1>
-        <p>Welcome to the dashboard for AGRIDS Map!</p>
-        <ServerConnectionTest />
+        <h1>VIEW</h1>
       </div>
     </MainLayout>
   );

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="border-2 p-3 rounded-2xl w-[80%] h-[5rem] flex justify-between">
+    <nav className="border-2 p-3 rounded-2xl w-[80%] h-[5rem] flex justify-between shadow-md">
       <h1 className="flex items-center gap-4 text-3xl font-medium">
         <Link href="/" title="agrids home page">
           {/* Switch to next/image at somepoint if you can be bothered - sizing is annoying */}
@@ -17,13 +17,13 @@ export default function Navbar() {
         Agrids Map
       </h1>
       <ul className="flex gap-2 text-lg font-medium items-center">
-        <NavbarButton href="/">Home</NavbarButton>
-        <NavbarButton href="login">View Vineyard</NavbarButton>
-        <NavbarButton href="register">Import</NavbarButton>
-        <NavbarButton href="register">Create</NavbarButton>
-        <NavbarButton href="register">Robotics</NavbarButton>
-        <NavbarButton href="register">Admin Development</NavbarButton>
-        <NavbarButton href="login">Logout</NavbarButton>
+        <NavbarButton href="/dashboard">Home</NavbarButton>
+        <NavbarButton href="/view">View Vineyard</NavbarButton>
+        <NavbarButton href="/import">Import</NavbarButton>
+        <NavbarButton href="/create">Create</NavbarButton>
+        <NavbarButton href="/robotics">Robotics</NavbarButton>
+        <NavbarButton href="/admin">Admin Development</NavbarButton>
+        <NavbarButton href="login" red>Logout</NavbarButton>
       </ul>
     </nav>
   );
