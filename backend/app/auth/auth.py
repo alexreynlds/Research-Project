@@ -40,8 +40,8 @@ def register():
     try:
         hashed = bcrypt.generate_password_hash(password).decode("utf-8")
         db.execute(
-            "INSERT INTO users (email, password) VALUES (?, ?)",
-            (email, hashed),
+            "INSERT INTO users (email, password, account_type) VALUES (?, ?, ?)",
+            (email, hashed, "user"),
         )
         db.commit()
         return jsonify({"message": "Account created successfully"}), 201

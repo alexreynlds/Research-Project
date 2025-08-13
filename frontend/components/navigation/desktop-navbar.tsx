@@ -3,11 +3,11 @@ import NavbarButton from "./navbar-button";
 import LogoutButton from "./logout-button";
 import Link from "next/link";
 
-export default function Navbar() {
+export default function DesktopNavbar() {
   return (
-    <nav className="border-2 p-3 rounded-2xl w-[80%] h-[5rem] flex justify-between shadow-md">
+    <nav className="border-2 p-4 rounded-2xl w-full h-[5rem] flex justify-between shadow-md hidden md:flex">
       <h1 className="flex items-center gap-4 text-3xl font-medium">
-        <Link href="/" title="agrids home page">
+        <Link href="/dashboard" title="agrids home page">
           {/* Switch to next/image at somepoint if you can be bothered - sizing is annoying */}
           <img
             src="/img/agrids_logo_transparent_crop.png"

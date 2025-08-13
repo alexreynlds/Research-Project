@@ -17,10 +17,12 @@ export default function DashboardClient() {
   }
 
   return (
-    <div>
-      <h1>DASHBOARD</h1>
-      <p>Logged in as: {user.email}</p>
-      <p>Welcome to the dashboard for AGRIDS Map!</p>
+    <div className="flex flex-col h-full justify-between gap-5">
+      <div className="flex flex-col border-2 p-5 rounded-xl h-full shadow-md">
+        <h1>DASHBOARD</h1>
+        <p>Logged in as: {user.email}</p>
+        <p>Welcome to the dashboard for AGRIDS Map!</p>
+      </div>
       <ServerConnectionTest />
     </div>
   );

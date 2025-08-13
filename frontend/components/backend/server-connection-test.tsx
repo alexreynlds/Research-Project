@@ -41,7 +41,7 @@ export default function ServerConnectionTest() {
     status === "Connected to server" ? "bg-green-500" : "bg-red-500";
 
   return (
-    <div className="border-2 rounded-lg p-4 w-full bg-cyan-200 flex flex-col items-center gap-3">
+    <div className="border-2-cyan-200 rounded-lg p-4 w-full bg-cyan-200 flex flex-col items-center gap-3 shadow-md">
       <h2>
         <b>Server Connection Status:</b>
       </h2>
