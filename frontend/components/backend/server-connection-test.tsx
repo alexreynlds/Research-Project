@@ -26,7 +26,10 @@ export default function ServerConnectionTest() {
         setStatus("Failed to connect to server");
       }
     } catch (error) {
-      setStatus("Failed to connect to server");
+      setStatus(
+        "Failed to connect to server" +
+          `: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
   }
 

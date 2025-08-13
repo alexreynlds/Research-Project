@@ -1,9 +1,8 @@
 import LoginCard from "@/components/login/login-card";
 
-
 export const metadata = {
-  title: 'Login'
-}
+  title: "Login",
+};
 
 export default function login() {
   return (
@@ -17,7 +16,6 @@ export default function login() {
         />
         <LoginCard />
       </main>
-
     </div>
   );
 }

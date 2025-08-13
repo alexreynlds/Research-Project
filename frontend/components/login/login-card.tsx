@@ -69,7 +69,12 @@ export default function LoginCard() {
         },
       );
 
-      let data: any = null;
+      interface APIResponse {
+        error?: string;
+        [key: string]: unknown;
+      }
+
+      let data: APIResponse | null = null;
       try {
         data = await resp.json();
       } catch {}
@@ -84,7 +89,11 @@ export default function LoginCard() {
       toast.success(`Account creation success`);
       handleCardChange();
     } catch (err) {
-      toast.error("Error");
+      toast.error(
+        `An error occurred during account creation: ${
+          err instanceof Error ? err.message : "Unknown error"
+        }`,
+      );
     }
   };
 

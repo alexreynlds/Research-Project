@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import authFetch from "./authFetch";
 
-type User = { id: number | string; email: string } | null;
+type User = { id: number | string; email: string; account_type: string } | null;
 
 const fetcher = async (path: string): Promise<User> => {
   const res = await authFetch(path);

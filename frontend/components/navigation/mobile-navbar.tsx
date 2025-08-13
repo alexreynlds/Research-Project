@@ -10,8 +10,8 @@ export default function MobileNavbar() {
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const panelRef = useRef(null);
-  const buttonRef = useRef(null);
-  const firstLinkRef = useRef(null);
+  const firstLinkRef = useRef<HTMLAnchorElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);

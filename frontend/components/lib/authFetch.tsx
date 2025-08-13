@@ -9,7 +9,7 @@ export default async function authFetch(path: string, init: RequestInit = {}) {
     headers: { "Content-Type": "application/json", ...(init.headers || {}) },
   };
 
-  let res = await fetch(`${API}${path}`, opts);
+  const res = await fetch(`${API}${path}`, opts);
   if (res.status !== 401) return res;
 
   // try to refresh once

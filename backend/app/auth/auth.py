@@ -5,6 +5,7 @@ import sqlite3
 from flask import Blueprint, request, jsonify, make_response
 from .jwt import (
     make_token,
+    make_access_refresh,
     decode_token,
     set_cookies,
     clear_cookies,
@@ -69,8 +70,9 @@ def login():
 
     try:
         db = get_db()
+
         row = db.execute(
-            "SELECT id, email, password FROM users WHERE email = ?",
+            "SELECT id, email, password, account_type FROM users WHERE email = ?",
             (email,),
         ).fetchone()
 
@@ -81,8 +83,8 @@ def login():
             return jsonify({"error": "Invalid email or password"}), 401
 
         uid = str(row["id"])
-        access = make_token(uid, ACCESS_TTL, "access")
-        refresh = make_token(uid, REFRESH_TTL, "refresh")
+        role = row["account_type"]
+        access, refresh = make_access_refresh(uid, role)
 
         resp = make_response(jsonify({"message": "Login successful"}))
         set_cookies(resp, access, refresh)
@@ -94,7 +96,7 @@ def login():
 
 # Endpoint to get the current user's information
 # It checks the session cookie for a valid access token
-# If the token is valid, it returns the user's ID and email
+# If the token is valid, it returns the user's ID, email and account type
 @auth_bp.get("/me")
 def me():
     token = request.cookies.get("session")
@@ -138,7 +140,21 @@ def refresh():
     if not decoded or decoded.get("typ") != "refresh":
         return jsonify({"error": "Unauthorized"}), 401
 
-    new_access = make_token(decoded["sub"], ACCESS_TTL, "access")
+    uid = decoded.get("sub")
+    role = decoded.get("role")
+
+    if not role:
+        db = get_db()
+        row = db.execute(
+            "SELECT account_type FROM users WHERE id = ?",
+            (uid,),
+        ).fetchone()
+        role = row["account_type"] if row else "user"
+
+    new_access = make_token(
+        uid, ACCESS_TTL, "access", {"role": role, "account_type": role}
+    )
+
     resp = make_response(jsonify({"ok": True}))
 
     set_cookie(resp, "session", new_access, ACCESS_TTL)
