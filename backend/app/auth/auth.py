@@ -107,7 +107,9 @@ def me():
 
     uid = decoded.get("sub")
     db = get_db()
-    row = db.execute("SELECT id, email FROM users WHERE id = ?", (uid,)).fetchone()
+    row = db.execute(
+        "SELECT id, email, account_type FROM users WHERE id = ?", (uid,)
+    ).fetchone()
 
     if not row:
         return jsonify({"error": "User not found"}), 404
@@ -117,6 +119,7 @@ def me():
             {
                 "id": row["id"] if hasattr(row, "keys") else row[0],
                 "email": row["email"] if hasattr(row, "keys") else row[1],
+                "account_type": row["account_type"] if hasattr(row, "keys") else row[2],
             }
         ),
         200,

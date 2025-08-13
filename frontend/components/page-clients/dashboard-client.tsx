@@ -21,6 +21,12 @@ export default function DashboardClient() {
       <div className="flex flex-col border-2 p-5 rounded-xl h-full shadow-md">
         <h1>DASHBOARD</h1>
         <p>Logged in as: {user.email}</p>
+        {user.account_type == "admin" && (
+          <p className="text-red-500">
+            You are logged in as an admin. Please use the admin dashboard for
+            administrative tasks.
+          </p>
+        )}
         <p>Welcome to the dashboard for AGRIDS Map!</p>
       </div>
       <ServerConnectionTest />
