@@ -28,7 +28,7 @@ export default function LogoutButton({ className }) {
     <button
       onClick={handleLogout}
       className={clsx(
-        "bg-red-500 hover:bg-red-600 py-1 px-4 rounded-xl text-white transition-colors duration-300",
+        "bg-red-500 hover:bg-red-600 py-1 px-4 rounded-xl text-white transition-colors duration-300 cursor-pointer",
         className,
       )}
       disabled={loading}
