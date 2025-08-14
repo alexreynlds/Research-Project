@@ -96,7 +96,7 @@ def login():
 
 # Endpoint to get the current user's information
 # It checks the session cookie for a valid access token
-# If the token is valid, it returns the user's ID, email and account type
+# If the token is valid, it returns the user's ID and email
 @auth_bp.get("/me")
 def me():
     token = request.cookies.get("session")
