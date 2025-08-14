@@ -20,7 +20,7 @@ export default function Page() {
 
   return (
     <MainLayout>
-      <h1>DASHBOARD</h1>
+      <h1>ADMIN</h1>
       {user && (
         <p>
           Welcome, {user.email}, {user.account_type}

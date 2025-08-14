@@ -26,6 +26,7 @@ export default function Page() {
     }
   };
 
+  //TODO: ADD EMAIL VALIDATION
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
