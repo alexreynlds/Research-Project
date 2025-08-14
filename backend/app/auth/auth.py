@@ -83,8 +83,8 @@ def login():
             return jsonify({"error": "Invalid email or password"}), 401
 
         uid = str(row["id"])
-        role = row["account_type"]
-        access, refresh = make_access_refresh(uid, role)
+        account_type = row["account_type"]
+        access, refresh = make_access_refresh(uid, account_type)
 
         resp = make_response(jsonify({"message": "Login successful"}))
         set_cookies(resp, access, refresh)
@@ -141,19 +141,17 @@ def refresh():
         return jsonify({"error": "Unauthorized"}), 401
 
     uid = decoded.get("sub")
-    role = decoded.get("role")
+    account_type = decoded.get("account_type")
 
-    if not role:
+    if not account_type:
         db = get_db()
         row = db.execute(
             "SELECT account_type FROM users WHERE id = ?",
             (uid,),
         ).fetchone()
-        role = row["account_type"] if row else "user"
+        account_type = row["account_type"] if row else "user"
 
-    new_access = make_token(
-        uid, ACCESS_TTL, "access", {"role": role, "account_type": role}
-    )
+    new_access = make_token(uid, ACCESS_TTL, "access", {"account_type": account_type})
 
     resp = make_response(jsonify({"ok": True}))
 

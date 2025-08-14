@@ -102,8 +102,8 @@ def clear_cookies(resp):
 
 
 # Helper function to easily create access and refresh tokens
-def make_access_refresh(sub: str, role: str) -> tuple[str, str]:
-    access = make_token(sub, ACCESS_TTL, "access", {"role": role})
-    refresh = make_token(sub, REFRESH_TTL, "refresh", {"role": role})
+def make_access_refresh(sub: str, account_type: str) -> tuple[str, str]:
+    access = make_token(sub, ACCESS_TTL, "access", {"account_type": account_type})
+    refresh = make_token(sub, REFRESH_TTL, "refresh", {"account_type": account_type})
 
     return access, refresh

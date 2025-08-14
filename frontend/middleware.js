@@ -51,9 +51,11 @@ export async function middleware(req) {
     }
   }
 
+  // Continue
   return NextResponse.next();
 }
 
+// Only activate on these routes
 export const config = {
   matcher: ["/dashboard/:path*", "/admin/:path*"],
 };
