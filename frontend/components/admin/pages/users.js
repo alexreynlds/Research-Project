@@ -100,6 +100,7 @@ export default function AdminUsersPage() {
   const [users, setUsers] = useState([]);
   const [vineyards, setVineyards] = useState([]);
   const [loading, setLoading] = useState(true);
+  // TODO: implement filtering
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
@@ -236,7 +237,7 @@ export default function AdminUsersPage() {
 
   return (
     <div className="w-full h-full">
-      <h2 className="text-3xl">Users List</h2>
+      <h2 className="text-3xl mb-3 underline">Users List</h2>
 
       {loading ? (
         <p>loading users...</p>

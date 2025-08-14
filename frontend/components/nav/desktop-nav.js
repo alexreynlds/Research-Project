@@ -6,7 +6,7 @@ import LogoutButton from "./logout-button";
 import Link from "next/link";
 import useAuth from "../auth/auth-context";
 
-export default function DesktopNavbar() {
+export default function DesktopNavbar({ pageTitle = "" }) {
   const { user } = useAuth();
   return (
     <nav className="border-2 p-4 rounded-2xl w-full h-[72px] justify-between shadow-md hidden md:flex">
@@ -19,7 +19,7 @@ export default function DesktopNavbar() {
             className="h-10 mt-[-5px]"
           />
         </Link>
-        Agrids Map
+        Agrids Map - {pageTitle}
       </h1>
       <ul className="flex gap-2 text-lg font-medium items-center">
         <NavbarButton href="/dashboard">Home</NavbarButton>

@@ -19,7 +19,7 @@ export default function Page() {
   }, [signOut, router]);
 
   return (
-    <MainLayout>
+    <MainLayout pageTitle="Dashboard">
       <h1>DASHBOARD</h1>
       {user && (
         <p>

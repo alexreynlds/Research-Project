@@ -14,7 +14,7 @@ export default function Page() {
 
   return (
     user && (
-      <MainLayout>
+      <MainLayout pageTitle="Admin Dashboard">
         <div className="border-2 w-full rounded-md p-3 flex flex-row items-center justify-between">
           <ul className="flex gap-5">
             <AdminButton page={0} currentPage={page} onClick={() => setPage(0)}>
