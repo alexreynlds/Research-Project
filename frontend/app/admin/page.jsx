@@ -1,6 +1,7 @@
 "use client";
 
 import AdminButton from "@/components/admin/admin-button";
+import AdminUsersPage from "@/components/admin/pages/users";
 import useAuth from "@/components/auth/auth-context";
 import MainLayout from "@/components/layouts/main-layout";
 import { useRouter } from "next/navigation";
@@ -14,8 +15,8 @@ export default function Page() {
   return (
     user && (
       <MainLayout>
-        <div className="border-2 w-auto rounded-md p-3 flex flex-row justify-center">
-          <ul className="flex gap-5 ">
+        <div className="border-2 w-full rounded-md p-3 flex flex-row items-center justify-between">
+          <ul className="flex gap-5">
             <AdminButton page={0} currentPage={page} onClick={() => setPage(0)}>
               USERS
             </AdminButton>
@@ -29,13 +30,12 @@ export default function Page() {
               ORION DATA VIEWER
             </AdminButton>
           </ul>
+          <div>
+            <p className="font-bold">Welcome, {user.email}</p>
+          </div>
         </div>
-        <div>
-          {page}
-          <h1>ADMIN</h1>
-          <p>
-            Welcome, {user.email}, {user.account_type}
-          </p>
+        <div className="border-2 p-3 w-full h-full rounded-md">
+          {page == 0 && <AdminUsersPage />}
         </div>
       </MainLayout>
     )

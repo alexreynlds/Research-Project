@@ -9,7 +9,7 @@ import useAuth from "../auth/auth-context";
 export default function DesktopNavbar() {
   const { user } = useAuth();
   return (
-    <nav className="border-2 p-4 rounded-2xl w-full h-[5rem] justify-between shadow-md hidden md:flex">
+    <nav className="border-2 p-4 rounded-2xl w-full h-[72px] justify-between shadow-md hidden md:flex">
       <h1 className="flex items-center gap-4 text-3xl font-medium">
         <Link href="/dashboard" title="agrids home page">
           {/* Switch to next/image at somepoint if you can be bothered - sizing is annoying */}
