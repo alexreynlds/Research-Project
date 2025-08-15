@@ -36,9 +36,11 @@ To run the backend of the AGRIDs project locally, follow these steps:
 cd backend
 ```
 
-2. Enter the Virtual Environment
+2. Create a virtual environment and connect to it
 ```bash
-source /.venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
 ```
 
 3. Install Dependencies
