@@ -2,6 +2,7 @@
 
 import MenuButton from "@/components/nav/menu-button";
 import AdminUsersPage from "@/components/admin/pages/users";
+import AdminAPIPage from "@/components/admin/pages/api";
 import useAuth from "@/components/auth/auth-context";
 import MainLayout from "@/components/layouts/main-layout";
 import { useState } from "react";
@@ -34,6 +35,7 @@ export default function Page() {
         </div>
         <div className="border-2 p-3 w-full h-full rounded-md">
           {page == 0 && <AdminUsersPage />}
+          {page == 2 && <AdminAPIPage />}
         </div>
       </MainLayout>
     )

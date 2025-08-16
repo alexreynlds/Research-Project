@@ -87,10 +87,12 @@ def create_app():
     from .test_functions.test import test_bp
     from .auth.auth import auth_bp
     from .admin.admin import admin_bp
+    from .security.api_keys import api_keys_bp
 
     app.register_blueprint(test_bp, url_prefix="/api")
     app.register_blueprint(auth_bp, url_prefix="/api")
     app.register_blueprint(admin_bp, url_prefix="/api/admin")
+    app.register_blueprint(api_keys_bp, url_prefix="/api")
 
     init_db()
 
