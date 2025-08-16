@@ -6,12 +6,12 @@ import { toast } from "sonner";
 // Component to display a user's vineyards
 function VineyardChip({ vineyard, onRemove }) {
   return (
-    <span className="inline-flex items-center gap-2 px-2 py-1 rounded-full">
+    <span className="inline-flex items-center gap-4 px-3 py-1 rounded-full border-2">
       {vineyard.name}
       <button
         type="button"
         onClick={onRemove}
-        className="rounded px-1 hover:bg-gray-200"
+        className="px-2 bg-red-400 hover:bg-red-600 border-1 rounded-full cursor-pointer"
         aria-label={`Remove ${vineyard.name} vineyard`}
       >
         x
@@ -34,7 +34,7 @@ function UserRow({
     <div className="rounded-lg border p-4 bg-white/70 backdrop-blur mb-4">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <div className="font-semibold">{user.email}</div>
+          <div className="font-semibold underline">{user.email}</div>
           <div className="text-xs text-gray-600">
             id: {user.id} • role: {user.account_type}
           </div>
@@ -50,7 +50,7 @@ function UserRow({
       </div>
 
       <div className="mt-3">
-        <div className="text-sm font-medium mb-1">Vineyards</div>
+        <div className="text-sm font-medium mb-1 underline">Vineyards</div>
         <div className="flex flex-wrap">
           {user.vineyards?.length ? (
             user.vineyards.map((vineyard) => (
@@ -66,7 +66,7 @@ function UserRow({
         </div>
       </div>
 
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-3 flex items-center gap-2 flex-col md:flex-row">
         <select
           className="border rounded px-2 py-1"
           value={selected}
