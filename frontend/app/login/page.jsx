@@ -74,6 +74,7 @@ export default function Page() {
                 <label className="text-sm text-gray-600">Email</label>
                 <input
                   placeholder="Email"
+                  type="email"
                   className="border-2 p-2 rounded-sm mb-2"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
@@ -126,6 +127,7 @@ export default function Page() {
                 <label className="text-sm text-gray-600">Email</label>
                 <input
                   placeholder="Email"
+                  type="email"
                   className="border-2 p-2 rounded-sm mb-2"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
