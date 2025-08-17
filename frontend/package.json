@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@turf/turf": "^7.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "jose": "^6.0.12",

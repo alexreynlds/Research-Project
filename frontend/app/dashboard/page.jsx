@@ -51,7 +51,7 @@ export default function Page() {
             Welcome, {user.email}
           </p>
         </div>
-        <div className="border-2 w-full h-full rounded-md relative overflow-hidden">
+        <div className="border-2 w-full rounded-md relative h-auto">
           {page === 0 && <View />}
         </div>
       </MainLayout>
