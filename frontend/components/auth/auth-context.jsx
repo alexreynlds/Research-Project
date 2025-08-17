@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
   // then we need to fetch the user data from the backend, including their email and account type
   const fetchUser = async ({ silent = false } = {}) => {
     try {
-      let res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/me`, {
+      let res = await fetch(`/api/me`, {
         credentials: "include",
       });
 
@@ -41,15 +41,12 @@ export function AuthProvider({ children }) {
       if (res.status === 401) {
         if (!triedRefresh.current) {
           triedRefresh.current = true;
-          const r = await fetch(
-            `${process.env.NEXT_PUBLIC_API_BASE}/api/refresh`,
-            {
-              method: "POST",
-              credentials: "include",
-            },
-          );
+          const r = await fetch(`/api/refresh`, {
+            method: "POST",
+            credentials: "include",
+          });
           if (r.ok) {
-            res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/me`, {
+            res = await fetch(`/api/me`, {
               credentials: "include",
             });
             if (res.ok) {
@@ -88,7 +85,7 @@ export function AuthProvider({ children }) {
   // Checking the backend for a valid user
   // if successful it then fetches the user data
   const signIn = async (email, password) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/login`, {
+    const res = await fetch(`/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -105,15 +102,12 @@ export function AuthProvider({ children }) {
   };
 
   const register = async (email, password) => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE}/api/register`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      },
-    );
+    const res = await fetch(`/api/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
+    });
     if (!res.ok) {
       let msg = "Registration failed";
       try {
@@ -126,7 +120,7 @@ export function AuthProvider({ children }) {
   // Sign the user out
   const signOut = async () => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/logout`, {
+      await fetch(`/api/logout`, {
         method: "POST",
         credentials: "include",
       });

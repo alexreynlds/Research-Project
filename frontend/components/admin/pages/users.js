@@ -107,7 +107,7 @@ export default function AdminUsersPage() {
     (async () => {
       try {
         const [usersRes, vineyardsRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/admin/users`, {
+          fetch(`/api/admin/users`, {
             credentials: "include",
             cache: "no-store",
           }),
@@ -158,17 +158,14 @@ export default function AdminUsersPage() {
     upsertUser(next);
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/admin/users/${user.id}/vineyards`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ vineyardId }),
+      const res = await fetch(`/api/admin/users/${user.id}/vineyards`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({ vineyardId }),
+      });
       if (!res.ok) {
         throw new Error("Failed to add vineyard");
       }
@@ -192,7 +189,7 @@ export default function AdminUsersPage() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/admin/users/${user.id}/vineyards/${vineyard.id}`,
+        `/api/admin/users/${user.id}/vineyards/${vineyard.id}`,
         { method: "DELETE", credentials: "include" },
       );
       if (!res.ok) {
@@ -218,13 +215,10 @@ export default function AdminUsersPage() {
     setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/admin/user/${user.id}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        },
-      );
+      const res = await fetch(`/api/admin/user/${user.id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
       if (!res.ok) {
         throw new Error("Failed to delete user");
       }

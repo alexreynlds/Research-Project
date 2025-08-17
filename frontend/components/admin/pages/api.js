@@ -11,39 +11,33 @@ export default function AdminAPIPage() {
   const [newKey, setNewKey] = useState("");
 
   async function fetchApiKeys() {
+    setIsLoading(true);
     try {
-      console.log("Fetching API keys...");
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/api_keys`,
-        {
-          credentials: "include",
-          cache: "no-store",
-        },
-      );
+      const res = await fetch(`/api/api_keys`, {
+        credentials: "include",
+        cache: "no-store",
+      });
 
       if (!res.ok) {
         toast.error("Failed to fetch API keys");
         return;
       }
       const data = await res.json();
-      console.log("API keys fetched:", data);
       setApiKeys(data.api_keys || data.apiKeys || []);
       toast.success("API keys fetched successfully");
     } catch (error) {
       toast.error(`Error fetching API keys: ${error.message}`);
     }
+    setIsLoading(false);
   }
 
   async function generateAPIKey() {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/api_keys`,
-        {
-          method: "POST",
-          credentials: "include",
-          cache: "no-store",
-        },
-      );
+      const res = await fetch(`/api/api_keys`, {
+        method: "POST",
+        credentials: "include",
+        cache: "no-store",
+      });
 
       const data = await res.json();
       if (!res.ok)
@@ -61,14 +55,11 @@ export default function AdminAPIPage() {
     if (!confirm("Are you sure you want to delete this API key?")) return;
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/api_keys/${key}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-          cache: "no-store",
-        },
-      );
+      const res = await fetch(`/api/api_keys/${key}`, {
+        method: "DELETE",
+        credentials: "include",
+        cache: "no-store",
+      });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to delete API key");
       toast.success("API key deleted successfully");
@@ -114,6 +105,12 @@ export default function AdminAPIPage() {
               Copy key
             </button>
           </div>
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="flex items-center justify-center h-16">
+          <span className="text-gray-500">Loading API keys...</span>
         </div>
       )}
 

@@ -5,17 +5,17 @@ export default async function Home() {
   const cookieHeader = (await cookies()).toString();
   const opts = { headers: { cookie: cookieHeader }, cache: "no-store" };
 
-  let res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/me`, opts);
+  let res = await fetch(`/api/me`, opts);
   if (res.ok) {
     redirect("/dashboard");
   }
 
-  const r = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/refresh`, {
+  const r = await fetch(`/api/refresh`, {
     ...opts,
     method: "POST",
   });
   if (r.ok) {
-    let res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/me`, opts);
+    let res = await fetch(`/api/me`, opts);
     if (res.ok) {
       redirect("/dashboard");
     }
