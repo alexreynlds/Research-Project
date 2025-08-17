@@ -24,7 +24,6 @@ export default function AdminAPIPage() {
       }
       const data = await res.json();
       setApiKeys(data.api_keys || data.apiKeys || []);
-      toast.success("API keys fetched successfully");
     } catch (error) {
       toast.error(`Error fetching API keys: ${error.message}`);
     }
