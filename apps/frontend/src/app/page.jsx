@@ -15,7 +15,7 @@ export default function Home() {
     user && (
       <MainLayout pageTitle="Dashboard">
         <div className="border-2 w-full rounded-md p-3 flex flex-col gap-6 md:flex-row items-center justify-between">
-          <ul className="grid grid-cols-2 gap-2 sm:flex sm:gap-3 w-fit">
+          <ul className="grid grid-cols-2 gap-2 sm:flex sm:gap-3 w-full sm:w-fit">
             <MenuButton page={0} currentPage={page} onClick={() => setPage(0)}>
               VIEW
             </MenuButton>
