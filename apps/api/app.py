@@ -5,6 +5,7 @@ from extensions import bcrypt
 from dotenv import load_dotenv
 from db import init_db, close_db
 from auth import auth_bp
+from admin import admin_bp
 
 
 def create_app():
@@ -38,6 +39,7 @@ def create_app():
         init_db()
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(admin_bp)
 
     # Small health check endpoint
     @app.get("/health")

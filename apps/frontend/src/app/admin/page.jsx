@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import MainLayout from "@/components/layouts/main-layout";
 import MenuButton from "@/components/nav/menu-button";
+import UsersPage from "@/components/admin/users";
 
 export default function Page() {
   const { user } = useAuth();
@@ -32,7 +33,9 @@ export default function Page() {
             <p className="font-bold underline">Welcome, {user.email}</p>
           </div>
         </div>
-        <div className="border-2 p-3 w-full h-full rounded-md"></div>
+        <div className="border-2 p-3 w-full h-full rounded-md">
+          <UsersPage />
+        </div>
       </MainLayout>
     )
   );
