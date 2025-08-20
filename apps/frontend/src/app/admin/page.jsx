@@ -34,7 +34,7 @@ export default function Page() {
           </div>
         </div>
         <div className="border-2 p-3 w-full h-full rounded-md">
-          <UsersPage />
+          {page === 0 && <UsersPage />}
         </div>
       </MainLayout>
     )
