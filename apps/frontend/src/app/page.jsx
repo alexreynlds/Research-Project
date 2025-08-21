@@ -6,7 +6,9 @@ import useAuth from "@/components/auth/auth-context";
 import MainLayout from "@/components/layouts/main-layout";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
+
 import ViewPage from "@/components/dashboard/view";
+import CreateMapPage from "@/components/dashboard/create-map";
 
 export default function Home() {
   const { user } = useAuth();
@@ -132,7 +134,7 @@ export default function Home() {
           {page === 4 && <div>Import GeoJSON</div>}
           {page === 5 && <div>Import Outfields GeoJSON</div>}
           {page === 6 && <div>Import Shapefile</div>}
-          {page === 7 && <div>Create Map</div>}
+          {page === 7 && <CreateMapPage />}
           {page === 8 && <div>Edit Map</div>}
         </div>
       </MainLayout>
