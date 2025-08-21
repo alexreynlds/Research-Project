@@ -89,12 +89,12 @@ export default function Page() {
                   value={password}
                 />
                 <div className="flex items-center justify-between mt-2 mb-4">
-                  <div className="flex items-center">
-                    <input type="checkbox" id="remember" className="mr-2" />
-                    <label htmlFor="remember" className="text-sm text-gray-600">
-                      Remember me
-                    </label>
-                  </div>
+                  {/* <div className="flex items-center"> */}
+                  {/*   <input type="checkbox" id="remember" className="mr-2" /> */}
+                  {/*   <label htmlFor="remember" className="text-sm text-gray-600"> */}
+                  {/*     Remember me */}
+                  {/*   </label> */}
+                  {/* </div> */}
                   <a href="#" className="text-sm text-blue-600 hover:underline">
                     Forgot password?
                   </a>

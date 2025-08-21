@@ -6,6 +6,7 @@ import useAuth from "@/components/auth/auth-context";
 import MainLayout from "@/components/layouts/main-layout";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
+import ViewPage from "@/components/dashboard/view";
 
 export default function Home() {
   const { user } = useAuth();
@@ -123,7 +124,17 @@ export default function Home() {
             Welcome, {user.email}
           </p>
         </div>
-        <div className="border-2 w-full rounded-md relative flex-1 h-auto"></div>
+        <div className="border-2 w-full rounded-md relative flex-1 p-3 flex justify-center">
+          {page === 0 && <ViewPage />}
+          {page === 1 && <div>Import Labelled CSV</div>}
+          {page === 2 && <div>Import Unlabelled CSV</div>}
+          {page === 3 && <div>Import Vines CSV</div>}
+          {page === 4 && <div>Import GeoJSON</div>}
+          {page === 5 && <div>Import Outfields GeoJSON</div>}
+          {page === 6 && <div>Import Shapefile</div>}
+          {page === 7 && <div>Create Map</div>}
+          {page === 8 && <div>Edit Map</div>}
+        </div>
       </MainLayout>
     )
   );
