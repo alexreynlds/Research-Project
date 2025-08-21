@@ -6,6 +6,17 @@ import { Map } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Separator } from "../ui/separator";
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+
 export default function ViewPage() {
   const mapRef = useRef(null);
 
@@ -30,7 +41,7 @@ export default function ViewPage() {
 
   return (
     <main className="min-h-full w-full">
-      <div id="map" className="w-full h-[500px] rounded" ref={mapRef} />
+      <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
       <Separator className="my-2" />
       <h2 className="text-xl underline">Vineyard Data</h2>
       <div className="flex flex-col sm:flex-row mt-2">
@@ -56,6 +67,34 @@ export default function ViewPage() {
       <h2 className="text-xl underline">Robotic Data</h2>
       <p>Total Topological Nav Map Edge Length:</p>
       <p>Total Topological Nav Map Nodes:</p>
+      <Separator className="my-2" />
+      <h2 className="text-xl underline">Block Data</h2>
+      <Table className="border-1 text-xs">
+        <TableHeader>
+          <TableRow>
+            <TableHead>ID</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Variety</TableHead>
+            <TableHead>Clone</TableHead>
+            <TableHead>Rootstock</TableHead>
+            <TableHead>Pruning Style</TableHead>
+            <TableHead>
+              Area (m<sup>2</sup>)
+            </TableHead>
+            <TableHead>Total Vine Rows</TableHead>
+            <TableHead>Total Vines</TableHead>
+            <TableHead>
+              Total Vine Row Length (m<sup>2</sup>)
+            </TableHead>
+            <TableHead>
+              Total Under Vine Area (m<sup>2</sup>)
+            </TableHead>
+            <TableHead>
+              Total Mid Row Area (m<sup>2</sup>)
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+      </Table>
     </main>
   );
 }
