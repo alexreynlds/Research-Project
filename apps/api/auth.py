@@ -72,14 +72,13 @@ def _current_user():
         return None
 
 
+# Helper function to consume an invite code
+# They are one time use per reg, so need to be deleted
 def _consume_invite_code(db, code: str) -> bool:
-    print(f"Consuming invite code: {code}")
     code = (code or "").strip()
     row = db.execute("SELECT id FROM invite_codes WHERE code = ?", (code,)).fetchone()
-    print(f"Invite code row: {row}")
     if not row:
         return False
-    print(f"Deleting invite code with id: {row['id']}")
     db.execute("DELETE FROM invite_codes WHERE id = ?", (row["id"],))
     db.commit()
     return True
@@ -115,6 +114,7 @@ def register():
         "SELECT id, email, role FROM users WHERE email=?", (email,)
     ).fetchone()
 
+    # Consume the invite code
     _consume_invite_code(db, inviteCode)
 
     tok = _make_token(user, "access")

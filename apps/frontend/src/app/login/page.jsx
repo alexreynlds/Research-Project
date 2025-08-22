@@ -18,10 +18,10 @@ export default function Page() {
 
   const [error, setError] = useState("");
 
+  // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      console.log("Logging in with:", email);
       await signIn(email, password);
       toast.success("Login successful!");
       router.replace("/");
@@ -35,16 +35,19 @@ export default function Page() {
     e.preventDefault();
     setError("");
 
+    // Require matching passwords
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
 
+    // Require invite code
     if (!inviteCode) {
       toast.error("Invite code is required for registration.");
       return;
     }
 
+    // Validate invite code
     try {
       await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE}/admin/invite_codes/${inviteCode}`,
@@ -63,6 +66,7 @@ export default function Page() {
       return;
     }
 
+    // Attempt registration
     try {
       await register(email, password, inviteCode);
       console.log("Registration successful for:", email);
