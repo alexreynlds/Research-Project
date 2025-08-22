@@ -135,7 +135,7 @@ export default function InviteCodesPage() {
       <div className="w-full h-fit border-1 rounded p-2 flex gap-2 justify-center items-center ">
         <h3 className="">Generate new invite code:</h3>
         <button
-          className="border-1 p-1 rounded cursor-pointer"
+          className="border-1 p-1 rounded cursor-pointer hover:bg-gray-100 transition-all duration-300"
           onClick={onGenerateCode}
         >
           Generate Code

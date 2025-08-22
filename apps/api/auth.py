@@ -72,29 +72,50 @@ def _current_user():
         return None
 
 
+def _consume_invite_code(db, code: str) -> bool:
+    print(f"Consuming invite code: {code}")
+    code = (code or "").strip()
+    row = db.execute("SELECT id FROM invite_codes WHERE code = ?", (code,)).fetchone()
+    print(f"Invite code row: {row}")
+    if not row:
+        return False
+    print(f"Deleting invite code with id: {row['id']}")
+    db.execute("DELETE FROM invite_codes WHERE id = ?", (row["id"],))
+    db.commit()
+    return True
+
+
 # Endpoint to allow users to register
 @auth_bp.post("/register")
 def register():
     data = request.get_json(silent=True) or {}
     email = _normalize_email(data.get("email"))
     password = data.get("password") or ""
-    if not email or not password:
-        return jsonify({"error": "Email and password required"}), 400
+    inviteCode = data.get("inviteCode") or ""
+
+    if not email or not password or not inviteCode:
+        return jsonify({"error": "Email, password and invite code required"}), 400
 
     db = get_db()
+
     if db.execute("SELECT 1 FROM users WHERE email=?", (email,)).fetchone():
         return jsonify({"error": "Email already registered"}), 409
 
     hashed = bcrypt.generate_password_hash(password).decode("utf-8")
     now = int(time.time())
+
     db.execute(
         "INSERT INTO users (email, password_hash, role, created_at) VALUES (?,?,?,?)",
         (email, hashed, "user", now),
     )
+
     db.commit()
+
     user = db.execute(
         "SELECT id, email, role FROM users WHERE email=?", (email,)
     ).fetchone()
+
+    _consume_invite_code(db, inviteCode)
 
     tok = _make_token(user, "access")
     resp = make_response(

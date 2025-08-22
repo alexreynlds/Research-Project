@@ -36,15 +36,37 @@ export default function Page() {
     setError("");
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    if (!inviteCode) {
+      toast.error("Invite code is required for registration.");
       return;
     }
 
     try {
-      await register(email, password);
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/admin/invite_codes/${inviteCode}`,
+        {
+          method: "GET",
+          credentials: "include",
+          cache: "no-store",
+        },
+      ).then((res) => {
+        if (!res.ok) {
+          throw new Error("Invalid invite code.");
+        }
+      });
+    } catch (e) {
+      toast.error(e.message);
+      return;
+    }
+
+    try {
+      await register(email, password, inviteCode);
       console.log("Registration successful for:", email);
     } catch (e) {
-      setError(`Registration failed: ${e.message}`);
       toast.error(`Registration failed: ${e.message}`);
       console.log(error);
     }

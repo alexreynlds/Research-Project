@@ -43,10 +43,10 @@ export function AuthProvider({ children }) {
     return res;
   };
 
-  const register = async (email, password) => {
+  const register = async (email, password, inviteCode) => {
     const res = await api("/auth/register", {
       method: "POST",
-      body: { email, password },
+      body: { email, password, inviteCode },
     });
 
     if (res?.user) setUser(res.user);

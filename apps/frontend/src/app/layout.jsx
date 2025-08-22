@@ -1,5 +1,6 @@
 import { JetBrains_Mono } from "next/font/google";
 import { AuthProvider } from "@/components/auth/auth-context";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const jetbrains = JetBrains_Mono({
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${jetbrains.className} antialiased`}>
         <AuthProvider>{children}</AuthProvider>
+        <Toaster />
       </body>
     </html>
   );
