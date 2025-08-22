@@ -9,10 +9,13 @@ export default function Page() {
   const router = useRouter();
   const { signIn, register } = useAuth();
 
-  const [email, setEmail] = useState("");
   const [page, setPage] = useState(0);
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [inviteCode, setInviteCode] = useState("");
+
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
@@ -150,6 +153,14 @@ export default function Page() {
                   className="border-2 p-2 rounded-sm mb-2"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   value={confirmPassword}
+                />
+                <label className="text-sm text-gray-600">Invite Code</label>
+                <input
+                  type="text"
+                  value={inviteCode}
+                  placeholder="Invite Code"
+                  className="border-2 p-2 rounded-sm mb-2"
+                  onChange={(e) => setInviteCode(e.target.value)}
                 />
                 <button
                   type="submit"

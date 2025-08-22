@@ -6,6 +6,7 @@ import { useState } from "react";
 import MainLayout from "@/components/layouts/main-layout";
 import MenuButton from "@/components/nav/menu-button";
 import UsersPage from "@/components/admin/users";
+import InviteCodesPage from "@/components/admin/invite_codes";
 
 export default function Page() {
   const { user } = useAuth();
@@ -20,12 +21,15 @@ export default function Page() {
               USERS
             </MenuButton>
             <MenuButton page={1} currentPage={page} onClick={() => setPage(1)}>
-              DELETE ENTITY
+              INVITE CODES
             </MenuButton>
             <MenuButton page={2} currentPage={page} onClick={() => setPage(2)}>
-              GENERATE API KEYS
+              DELETE ENTITY
             </MenuButton>
             <MenuButton page={3} currentPage={page} onClick={() => setPage(3)}>
+              GENERATE API KEYS
+            </MenuButton>
+            <MenuButton page={4} currentPage={page} onClick={() => setPage(4)}>
               ORION DATA VIEWER
             </MenuButton>
           </ul>
@@ -35,6 +39,10 @@ export default function Page() {
         </div>
         <div className="border-2 p-3 w-full h-full rounded-md">
           {page === 0 && <UsersPage />}
+          {page === 1 && <InviteCodesPage />}
+          {page === 2 && <div>Delete Entity Page</div>}
+          {page === 3 && <div>Generate API Keys Page</div>}
+          {page === 4 && <div>Orion Data Viewer Page</div>}
         </div>
       </MainLayout>
     )

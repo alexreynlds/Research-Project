@@ -1,4 +1,6 @@
-import os, time, jwt
+import os
+import time
+import jwt
 from flask import Blueprint, request, jsonify, make_response, current_app
 from extensions import bcrypt
 from db import get_db
