@@ -3,9 +3,11 @@ from flask import Flask
 from flask_cors import CORS
 from extensions import bcrypt
 from dotenv import load_dotenv
+
 from db import init_db, close_db
 from auth import auth_bp
 from admin import admin_bp
+from api import api_bp
 
 
 def create_app():
@@ -40,6 +42,7 @@ def create_app():
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(api_bp)
 
     # Small health check endpoint
     @app.get("/health")
