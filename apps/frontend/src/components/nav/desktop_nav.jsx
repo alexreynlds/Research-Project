@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import NavbarButton from "./navbar-button";
-import LogoutButton from "./logout-button";
+import NavbarButton from "./navbar_button";
+import LogoutButton from "./logout_button";
 import Link from "next/link";
-import useAuth from "../auth/auth-context";
+import useAuth from "../auth/auth_context";
 
 export default function DesktopNavbar({ pageTitle = "" }) {
   const { user } = useAuth();

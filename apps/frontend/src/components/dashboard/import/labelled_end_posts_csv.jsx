@@ -4,9 +4,10 @@ import { useRef, useEffect, useState } from "react";
 
 import { Map } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
-export default function CreateMapPage() {
+export default function ImportLabelledEndPostsCsv() {
   const [vineyardID, setVineyardID] = useState("");
   const mapRef = useRef(null);
 
@@ -39,13 +40,9 @@ export default function CreateMapPage() {
       <Separator className="my-2" />
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-2 sm:flex-row justify-center">
-          <button className="border-2 rounded p-1 cursor-pointer bg-gray-100 hover:bg-gray-300 transition-colors duration-300">
-            Edit Properties
-          </button>
+          <Button>Edit Properties</Button>
           <div className="hidden sm:flex mx-4 self-stretch w-[1px] bg-border" />
-          <button className="border-2 rounded p-1 cursor-pointer bg-gray-100 hover:bg-gray-300 transition-colors duration-300">
-            Undo
-          </button>
+          <Button>Undo</Button>
         </div>
 
         <Separator className="my-2" />
@@ -64,12 +61,7 @@ export default function CreateMapPage() {
               value={vineyardID}
             />
             <div className="hidden sm:flex mx-1 self-stretch w-[1px] bg-border" />
-            <button
-              type="submit"
-              className="submit border-2 rounded p-1 cursor-pointer bg-gray-100 hover:bg-gray-300 transition-colors duration-300"
-            >
-              Save
-            </button>
+            <Button type="submit">Save</Button>
           </div>
         </form>
 

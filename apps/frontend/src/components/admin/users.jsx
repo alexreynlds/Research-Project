@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { Button } from "../ui/button";
 
 function UserRow({
   user,
@@ -20,13 +21,9 @@ function UserRow({
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => onDeleteUser(user)}
-          className="text-red-700 border border-red-300 px-3 py-1 rounded hover:bg-red-50 cursor-pointer"
-        >
+        <Button variant="destructive" onClick={() => onDeleteUser(user)}>
           Delete user
-        </button>
+        </Button>
       </div>
 
       <div className="mt-3">

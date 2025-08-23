@@ -1,6 +1,6 @@
 import { Toaster } from "sonner";
-import DesktopNavbar from "../nav/desktop-nav";
-import MobileNav from "../nav/mobile-nav";
+import DesktopNavbar from "../nav/desktop_nav";
+import MobileNav from "../nav/mobile_nav";
 import Footer from "./footer";
 
 // A layout that is applied to all pages except login

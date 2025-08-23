@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import useAuth from "../auth/auth-context";
+import { Button } from "../ui/button";
+import useAuth from "../auth/auth_context";
 import clsx from "clsx";
 
 export default function LogoutButton({ className }) {
@@ -25,15 +26,16 @@ export default function LogoutButton({ className }) {
   }
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
+      disabled={loading}
+      variant="destructive"
       className={clsx(
-        "bg-red-500 hover:bg-red-600 py-1 px-4 rounded-xl text-white hover:scale-105 transition-all duration-300 cursor-pointer",
+        "hover:scale-105 transition-all duration-300 bond",
         className,
       )}
-      disabled={loading}
     >
       {loading ? "Logging out…" : "Logout"}
-    </button>
+    </Button>
   );
 }

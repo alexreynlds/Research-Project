@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import useAuth from "@/components/auth/auth-context";
+import useAuth from "@/components/auth/auth_context";
 import { toast } from "sonner";
 
 export default function Page() {

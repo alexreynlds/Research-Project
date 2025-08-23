@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { FaRegCopy } from "react-icons/fa";
+import { Button } from "../ui/button";
 
 function CodeRow({ code, onDeleteCode }) {
   return (
@@ -25,13 +26,13 @@ function CodeRow({ code, onDeleteCode }) {
           </div>
         </div>
 
-        <button
+        <Button
           type="button"
+          variant="destructive"
           onClick={() => onDeleteCode(code)}
-          className="text-red-700 border border-red-300 px-3 py-1 rounded hover:bg-red-50 cursor-pointer"
         >
           Delete code
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -134,12 +135,7 @@ export default function InviteCodesPage() {
 
       <div className="w-full h-fit border-1 rounded p-2 flex gap-2 justify-center items-center ">
         <h3 className="">Generate new invite code:</h3>
-        <button
-          className="border-1 p-1 rounded cursor-pointer hover:bg-gray-100 transition-all duration-300"
-          onClick={onGenerateCode}
-        >
-          Generate Code
-        </button>
+        <Button onClick={onGenerateCode}>Generate Code</Button>
       </div>
 
       {loading ? (

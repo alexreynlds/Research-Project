@@ -1,12 +1,13 @@
 "use client";
 
-import useAuth from "@/components/auth/auth-context";
+import useAuth from "@/components/auth/auth_context";
 import { useState } from "react";
 
-import MainLayout from "@/components/layouts/main-layout";
-import MenuButton from "@/components/nav/menu-button";
+import MainLayout from "@/components/layouts/main_layout";
+import MenuButton from "@/components/nav/menu_button";
 import UsersPage from "@/components/admin/users";
 import InviteCodesPage from "@/components/admin/invite_codes";
+import ApiKeysPage from "@/components/admin/api_keys";
 
 export default function Page() {
   const { user } = useAuth();
@@ -41,7 +42,11 @@ export default function Page() {
           {page === 0 && <UsersPage />}
           {page === 1 && <InviteCodesPage />}
           {page === 2 && <div>Delete Entity Page</div>}
-          {page === 3 && <div>Generate API Keys Page</div>}
+          {page === 3 && (
+            <div>
+              <ApiKeysPage />
+            </div>
+          )}
           {page === 4 && <div>Orion Data Viewer Page</div>}
         </div>
       </MainLayout>

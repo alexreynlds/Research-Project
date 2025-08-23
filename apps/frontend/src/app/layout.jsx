@@ -1,5 +1,5 @@
 import { JetBrains_Mono } from "next/font/google";
-import { AuthProvider } from "@/components/auth/auth-context";
+import { AuthProvider } from "@/components/auth/auth_context";
 import { Toaster } from "sonner";
 import "./globals.css";
 
