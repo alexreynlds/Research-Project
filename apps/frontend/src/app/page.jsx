@@ -9,6 +9,9 @@ import { Separator } from "@/components/ui/separator";
 
 import ImportLabelledEndPostsCsv from "@/components/dashboard/import/labelled_end_posts_csv";
 import ImportUnlabelledEndPostsCsv from "@/components/dashboard/import/unlabelled_end_posts_csv";
+import ImportVinesCsv from "@/components/dashboard/import/vines_csv";
+import ImportGeoJson from "@/components/dashboard/import/geojson";
+
 import ViewPage from "@/components/dashboard/view";
 import CreateMapPage from "@/components/dashboard/create_map";
 
@@ -132,8 +135,8 @@ export default function Home() {
           {page === 0 && <ViewPage />}
           {page === 1 && <ImportLabelledEndPostsCsv />}
           {page === 2 && <ImportUnlabelledEndPostsCsv />}
-          {page === 3 && <div>Import Vines CSV</div>}
-          {page === 4 && <div>Import GeoJSON</div>}
+          {page === 3 && <ImportVinesCsv />}
+          {page === 4 && <ImportGeoJson />}
           {page === 5 && <div>Import Outfields GeoJSON</div>}
           {page === 6 && <div>Import Shapefile</div>}
           {page === 7 && <CreateMapPage />}
