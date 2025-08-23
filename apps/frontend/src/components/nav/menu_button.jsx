@@ -14,7 +14,7 @@ export default function MenuButton({
   if (variant === "default") {
     return (
       <Button
-        className={`text-white flex items-center justify-center font-bold px-2 py-1 hover:scale-105 transition-all duration-300 rounded cursor-pointer ${isActive ? "bg-blue-300" : "bg-green-300 hover:bg-green-500"}`}
+        className={`text-white flex items-center justify-center font-bold px-2 py-1 hover:scale-105 transition-all duration-300 rounded cursor-pointer ${isActive ? "bg-blue-300 hover:bg-blue-500" : "bg-green-300 hover:bg-green-500"}`}
         onClick={onClick}
       >
         {children}

@@ -125,55 +125,59 @@ export default function ImportVinesCsv() {
             "Longitude", "Vine Row", the row name/number, "Variety", "Clone",
             "Rootstock". E.g.
           </p>
-          <Table className="border-1 text-xs">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Vine ID</TableHead>
-                <TableHead>Latitude</TableHead>
-                <TableHead>Longitude</TableHead>
-                <TableHead>Vine Row</TableHead>
-                <TableHead>Variety</TableHead>
-                <TableHead>Clone</TableHead>
-                <TableHead>Rootstock</TableHead>
-              </TableRow>
-              <TableRow>
-                <TableCell>ROW 01 VINE 01</TableCell>
-                <TableCell>53.26818842</TableCell>
-                <TableCell>-0.52427737</TableCell>
-                <TableCell>1</TableCell>
-                <TableCell>Pinot Noir</TableCell>
-                <TableCell>115</TableCell>
-                <TableCell>41B</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>ROW 01 VINE 02</TableCell>
-                <TableCell>53.26803849</TableCell>
-                <TableCell>-0.52424047</TableCell>
-                <TableCell>1</TableCell>
-                <TableCell>Pinot Noir</TableCell>
-                <TableCell>115</TableCell>
-                <TableCell>41B</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>ROW 02 VINE 01</TableCell>
-                <TableCell>53.26818522</TableCell>
-                <TableCell>-0.52431449</TableCell>
-                <TableCell>2</TableCell>
-                <TableCell>Chardonnay</TableCell>
-                <TableCell>INRA 177</TableCell>
-                <TableCell>Fercal</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>ROW 02 VINE 02</TableCell>
-                <TableCell>53.26803515</TableCell>
-                <TableCell>-0.52427742</TableCell>
-                <TableCell>2</TableCell>
-                <TableCell>Chardonnay</TableCell>
-                <TableCell>INRA 177</TableCell>
-                <TableCell>Fercal</TableCell>
-              </TableRow>
-            </TableHeader>
-          </Table>
+          <div className="border rounded-md overflow-hidden">
+            <Table className="text-xs">
+              <TableHeader className="bg-muted/40">
+                <TableRow>
+                  <TableHead>Vine ID</TableHead>
+                  <TableHead>Latitude</TableHead>
+                  <TableHead>Longitude</TableHead>
+                  <TableHead>Vine Row</TableHead>
+                  <TableHead>Variety</TableHead>
+                  <TableHead>Clone</TableHead>
+                  <TableHead>Rootstock</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>ROW 01 VINE 01</TableCell>
+                  <TableCell>53.26818842</TableCell>
+                  <TableCell>-0.52427737</TableCell>
+                  <TableCell>1</TableCell>
+                  <TableCell>Pinot Noir</TableCell>
+                  <TableCell>115</TableCell>
+                  <TableCell>41B</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>ROW 01 VINE 02</TableCell>
+                  <TableCell>53.26803849</TableCell>
+                  <TableCell>-0.52424047</TableCell>
+                  <TableCell>1</TableCell>
+                  <TableCell>Pinot Noir</TableCell>
+                  <TableCell>115</TableCell>
+                  <TableCell>41B</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>ROW 02 VINE 01</TableCell>
+                  <TableCell>53.26818522</TableCell>
+                  <TableCell>-0.52431449</TableCell>
+                  <TableCell>2</TableCell>
+                  <TableCell>Chardonnay</TableCell>
+                  <TableCell>INRA 177</TableCell>
+                  <TableCell>Fercal</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>ROW 02 VINE 02</TableCell>
+                  <TableCell>53.26803515</TableCell>
+                  <TableCell>-0.52427742</TableCell>
+                  <TableCell>2</TableCell>
+                  <TableCell>Chardonnay</TableCell>
+                  <TableCell>INRA 177</TableCell>
+                  <TableCell>Fercal</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </div>
     </main>

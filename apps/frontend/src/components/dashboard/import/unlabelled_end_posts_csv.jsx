@@ -128,30 +128,34 @@ export default function ImportUnlabelledEndPostsCsv() {
             latitudes and longitudes for each row one for each end of the row.
             E.g.
           </p>
-          <Table className="border-1 text-xs">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Latitude</TableHead>
-                <TableHead>Longitude</TableHead>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26818842</TableCell>
-                <TableCell>-0.52427737</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26803849</TableCell>
-                <TableCell>-0.52424047</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26818842</TableCell>
-                <TableCell>-0.52431449</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26803515</TableCell>
-                <TableCell>-0.52427742</TableCell>
-              </TableRow>
-            </TableHeader>
-          </Table>
+          <div className="border rounded-md overflow-hidden">
+            <Table className="text-xs">
+              <TableHeader className="bg-muted/40">
+                <TableRow>
+                  <TableHead>Latitude</TableHead>
+                  <TableHead>Longitude</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>53.26818842</TableCell>
+                  <TableCell>-0.52427737</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>53.26803849</TableCell>
+                  <TableCell>-0.52424047</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>53.26818842</TableCell>
+                  <TableCell>-0.52431449</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>53.26803515</TableCell>
+                  <TableCell>-0.52427742</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
 
           <p>
             Draw a polygon to represent a block around the end post points.

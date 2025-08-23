@@ -113,31 +113,33 @@ export default function ImportOutfieldsGeoJson() {
             Import row lines GeoJSON file of one block, with these variables.
           </p>
 
-          <Table className="text-xs border-1">
-            <TableHeader>
-              <TableRow>
-                {headers.map((h) => (
-                  <TableHead key={h} className="whitespace-nowrap">
-                    {h}
-                  </TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {rows.map((row, idx) => (
-                <TableRow key={idx}>
-                  {row.map((cell, i) => (
-                    <TableCell
-                      key={`${idx}-${i}`}
-                      className="align-top whitespace-nowrap"
-                    >
-                      {cell || ""}
-                    </TableCell>
+          <div className="border rounded-md overflow-hidden">
+            <Table className="text-xs">
+              <TableHeader className="bg-muted/40">
+                <TableRow>
+                  {headers.map((h) => (
+                    <TableHead key={h} className="whitespace-nowrap">
+                      {h}
+                    </TableHead>
                   ))}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {rows.map((row, idx) => (
+                  <TableRow key={idx}>
+                    {row.map((cell, i) => (
+                      <TableCell
+                        key={`${idx}-${i}`}
+                        className="align-top whitespace-nowrap"
+                      >
+                        {cell || ""}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </div>
     </main>

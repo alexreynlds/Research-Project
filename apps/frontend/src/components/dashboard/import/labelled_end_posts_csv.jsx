@@ -126,35 +126,39 @@ export default function ImportLabelledEndPostsCsv() {
             latitudes and longitudes for each row one for each end of the row.
             E.g.
           </p>
-          <Table className="border-1 text-xs">
-            <TableHeader>
-              <TableRow>
-                <TableHead>Latitude</TableHead>
-                <TableHead>Longitude</TableHead>
-                <TableHead>Row</TableHead>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26818842</TableCell>
-                <TableCell>-0.52427737</TableCell>
-                <TableCell>1</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26803849</TableCell>
-                <TableCell>-0.52424047</TableCell>
-                <TableCell>1</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26818842</TableCell>
-                <TableCell>-0.52431449</TableCell>
-                <TableCell>2</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>53.26803515</TableCell>
-                <TableCell>-0.52427742</TableCell>
-                <TableCell>2</TableCell>
-              </TableRow>
-            </TableHeader>
-          </Table>
+          <div className="border rounded-md overflow-hidden">
+            <Table className="text-xs">
+              <TableHeader className="bg-muted/40">
+                <TableRow>
+                  <TableHead>Latitude</TableHead>
+                  <TableHead>Longitude</TableHead>
+                  <TableHead>Row</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>53.26818842</TableCell>
+                  <TableCell>-0.52427737</TableCell>
+                  <TableCell>1</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>53.26803849</TableCell>
+                  <TableCell>-0.52424047</TableCell>
+                  <TableCell>1</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>53.26818842</TableCell>
+                  <TableCell>-0.52431449</TableCell>
+                  <TableCell>2</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>53.26803515</TableCell>
+                  <TableCell>-0.52427742</TableCell>
+                  <TableCell>2</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
 
           <p>
             To save the created map, at least one block polygon must be created

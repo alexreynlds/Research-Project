@@ -8,6 +8,7 @@ import MenuButton from "@/components/nav/menu_button";
 import UsersPage from "@/components/admin/users";
 import InviteCodesPage from "@/components/admin/invite_codes";
 import ApiKeysPage from "@/components/admin/api_keys";
+import DeleteEntitiesPage from "@/components/admin/delete_entities";
 
 export default function Page() {
   const { user } = useAuth();
@@ -41,7 +42,7 @@ export default function Page() {
         <div className="border-2 p-3 w-full h-full rounded-md">
           {page === 0 && <UsersPage />}
           {page === 1 && <InviteCodesPage />}
-          {page === 2 && <div>Delete Entity Page</div>}
+          {page === 2 && <DeleteEntitiesPage />}
           {page === 3 && (
             <div>
               <ApiKeysPage />
