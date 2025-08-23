@@ -12,6 +12,7 @@ import ImportUnlabelledEndPostsCsv from "@/components/dashboard/import/unlabelle
 import ImportVinesCsv from "@/components/dashboard/import/vines_csv";
 import ImportGeoJson from "@/components/dashboard/import/geojson";
 import ImportOutfieldsGeoJson from "@/components/dashboard/import/outfields_geojson";
+import ImportShapefile from "@/components/dashboard/import/shapefile";
 
 import ViewPage from "@/components/dashboard/view";
 import CreateMapPage from "@/components/dashboard/create_map";
@@ -139,7 +140,7 @@ export default function Home() {
           {page === 3 && <ImportVinesCsv />}
           {page === 4 && <ImportGeoJson />}
           {page === 5 && <ImportOutfieldsGeoJson />}
-          {page === 6 && <div>Import Shapefile</div>}
+          {page === 6 && <ImportShapefile />}
           {page === 7 && <CreateMapPage />}
           {page === 8 && <div>Edit Map</div>}
         </div>

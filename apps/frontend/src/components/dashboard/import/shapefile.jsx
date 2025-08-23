@@ -1,58 +1,167 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
-import { Map } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableBody,
+  TableRow,
+} from "@/components/ui/table";
 
-export default function ImportUnlabelledEndPostsCsv() {
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+export default function ImportShapefile() {
+  const fileRef = useRef(null);
+
+  // Vineyard Data
   const [vineyardID, setVineyardID] = useState("");
-  const mapRef = useRef(null);
 
-  function saveVineyard(e) {
-    e.preventDefault();
+  const [fileName, setFileName] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  function openPicker() {
+    fileRef.current && fileRef.current.click();
   }
 
-  useEffect(() => {
-    const mapContainer = document.getElementById("map");
-    if (!mapContainer) return;
+  async function uploadCsvToBackend(file, vineyardID) {}
 
-    const map = new Map({
-      container: mapContainer,
-      style: "mapbox://styles/mapbox/satellite-streets-v12",
-      center: [-0.9772342405497342, 51.59632509886086],
-      zoom: 17,
-      accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
-    });
+  const headers = [
+    "Vineyard",
+    "Block",
+    "Vine Row",
+    "Vine",
+    "Polygon",
+    "Line",
+    "Point",
+  ];
 
-    return () => {
-      if (map) {
-        map.remove();
-      }
-    };
-  }, []);
+  const rows = [
+    [
+      "vineyard_id: String",
+      "block_id: String",
+      "vine_row_id: String",
+      "vine_id: String",
+      "polygon_id: String",
+      "line_id: String",
+      "point_id: String",
+    ],
+    [
+      "name: String",
+      "user_defined_id: String",
+      "user_defined_id: String",
+      "user_defined_id: String",
+      "user_defined_id: String",
+      "user_defined_id: String",
+      "user_defined_id: String",
+    ],
+    [
+      "owner: String",
+      "vineyard_id: String",
+      "vineyard_id: String",
+      "vineyard_id: String",
+      "vineyard_id: String",
+      "vineyard_id: String",
+      "vineyard_id: String",
+    ],
+    [
+      "street_address: String",
+      "name: String",
+      "block_id: String",
+      "vine_row_id: String",
+      "name: String",
+      "name: String",
+      "name: String",
+    ],
+    [
+      "geom: geo:json Polygon",
+      "date_start: DateTime",
+      "under_vine_width: Float",
+      "grapes_number: Float",
+      "category: String",
+      "category: String",
+      "category: String",
+    ],
+    [
+      "",
+      "date_end: DateTime",
+      "vine_spacing: Float",
+      "grapes_yield: Float",
+      "class_string: String",
+      "class_string: String",
+      "class_string: String",
+    ],
+    [
+      "",
+      "row_spacing_m: Float",
+      "anchor_post_distance: Float",
+      "rootstock: String",
+      "geom: geo:json Polygon",
+      "geom: geo:json LineString",
+      "location: geo:json Point",
+    ],
+    [
+      "",
+      "under_vine_width: Float",
+      "post_spacing: Float",
+      "variety: String",
+      "",
+      "",
+      "",
+    ],
+    [
+      "",
+      "anchor_post_distance: Float",
+      "pruning_style: String",
+      "clone: String",
+      "",
+      "",
+      "",
+    ],
+    [
+      "",
+      "vine_spacing: Float",
+      "clone: String",
+      "location: geo:json Point",
+      "",
+      "",
+      "",
+    ],
+    ["", "clone: String", "variety: String", "", "", "", ""],
+    ["", "variety: String", "rootstock: String", "", "", "", ""],
+    ["", "rootstock: String", "trellis_type: String", "", "", "", ""],
+    ["", "trellis_type: String", "fruiting_wire_height: Float", "", "", "", ""],
+    [
+      "",
+      "geom: geo:json Polygon",
+      "pruning_wire_height: Float",
+      "",
+      "",
+      "",
+      "",
+    ],
+    ["", "", "geom: geo:json LineString", "", "", "", ""],
+  ];
 
   return (
-    <main className="min-h-full w-full">
-      <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
-      <Separator className="my-2" />
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2 sm:flex-row justify-center">
-          <Button>Edit Properties</Button>
-          <div className="hidden sm:flex mx-4 self-stretch w-[1px] bg-border" />
-          <Button>Undo</Button>
+    <main className="w-full">
+      <div className="flex flex-col gap-3 items-center">
+        <div className="flex flex-col gap-2 sm:flex-row justify-between">
+          <Input id="csv" type="file" className="w-[250px]" ref={fileRef} />
+          <Button className="flex-1">Upload</Button>
         </div>
 
         <Separator className="my-2" />
 
-        <form
-          className="flex flex-col sm:flex-row gap-2 justify-center items-center"
-          onSubmit={saveVineyard}
-        >
-          <label className="text-sm text-gray-600">Vineyard ID:</label>
-          <div className="flex flex-row">
+        <form className="flex flex-row gap-2 justify-center items-center">
+          <Label className="text-sm text-gray-600">Vineyard ID:</Label>
+          <div className="flex flex-col md:flex-row gap-2">
             <input
               type="text"
               placeholder="Enter Vineyard ID"
@@ -60,18 +169,48 @@ export default function ImportUnlabelledEndPostsCsv() {
               onChange={(e) => setVineyardID(e.target.value)}
               value={vineyardID}
             />
-            <div className="hidden sm:flex mx-1 self-stretch w-[1px] bg-border" />
-            <Button type="submit">Save</Button>
           </div>
         </form>
 
         <Separator className="my-2" />
 
-        <p>
-          To create a new vineyard a vineyard feature, with name, address owner
-          and a polygon with coordinates representing the boundary of the
-          vineyard must be created.
-        </p>
+        <div className="w-full text-left flex flex-col gap-2">
+          <p>
+            Each feature mush have coordinates.
+            <br />
+            To create a new vineyard the Shapefile must include a vineyard
+            feature, with vineyard ID, name, address owner and a polygon with
+            coordinates representing the boundary of the vineyard.
+          </p>
+
+          <p>Accepted Features and Properties:</p>
+
+          <Table className="text-xs border-1">
+            <TableHeader>
+              <TableRow>
+                {headers.map((h) => (
+                  <TableHead key={h} className="whitespace-nowrap">
+                    {h}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.map((row, idx) => (
+                <TableRow key={idx}>
+                  {row.map((cell, i) => (
+                    <TableCell
+                      key={`${idx}-${i}`}
+                      className="align-top whitespace-nowrap"
+                    >
+                      {cell || ""}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </main>
   );

@@ -175,7 +175,7 @@ export default function ImportGeoJson() {
 
         <Separator className="my-2" />
 
-        <div className="text-left flex flex-col gap-2">
+        <div className="w-full text-left flex flex-col gap-2">
           <p>
             Each GeoJSON feature mush have coordinates.
             <br />
