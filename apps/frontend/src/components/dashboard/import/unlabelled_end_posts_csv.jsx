@@ -6,14 +6,32 @@ import { Map } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function ImportUnlabelledEndPostsCsv() {
-  const [vineyardID, setVineyardID] = useState("");
-  const mapRef = useRef(null);
+  const fileRef = useRef(null);
 
-  function saveVineyard(e) {
-    e.preventDefault();
-  }
+  // Vineyard Data
+  const [vineyardID, setVineyardID] = useState("");
+  const [vineyardName, setVineyardName] = useState("");
+  const [address, setAddress] = useState("");
+  const [owner, setOwner] = useState("");
+
+  const [fileName, setFileName] = useState("");
+  const [busy, setBusy] = useState(false);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     const mapContainer = document.getElementById("map");
@@ -34,25 +52,38 @@ export default function ImportUnlabelledEndPostsCsv() {
     };
   }, []);
 
+  function openPicker() {
+    fileRef.current && fileRef.current.click();
+  }
+
+  async function uploadCsvToBackend(file, vineyardID) {}
+
   return (
     <main className="min-h-full w-full">
       <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
       <Separator className="my-2" />
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2 sm:flex-row justify-center">
-          <Button>Edit Properties</Button>
-          <div className="hidden sm:flex mx-4 self-stretch w-[1px] bg-border" />
-          <Button>Undo</Button>
+      <div className="flex flex-col gap-3 items-center">
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row justify-between">
+            <Input id="csv" type="file" className="flex-1" ref={fileRef} />
+            <Button className="max-w-[30%] flex-1">Upload</Button>
+          </div>
+          <div className="flex flex-col gap-2 sm:flex-row justify-center">
+            <Button>Edit Properties</Button>
+            <div className="hidden sm:flex mx-2 self-stretch w-[1px] bg-border" />
+            <Button>Generate Lines</Button>
+            <div className="hidden sm:flex mx-2 self-stretch w-[1px] bg-border" />
+            <Button>Undo</Button>
+            <div className="hidden sm:flex mx-2 self-stretch w-[1px] bg-border" />
+            <Button>Download GeoJSON</Button>
+          </div>
         </div>
 
         <Separator className="my-2" />
 
-        <form
-          className="flex flex-col sm:flex-row gap-2 justify-center items-center"
-          onSubmit={saveVineyard}
-        >
-          <label className="text-sm text-gray-600">Vineyard ID:</label>
-          <div className="flex flex-row">
+        <form className="flex flex-col  gap-2 justify-center items-center">
+          <Label className="text-sm text-gray-600">Vineyard Data:</Label>
+          <div className="flex flex-col md:flex-row gap-2">
             <input
               type="text"
               placeholder="Enter Vineyard ID"
@@ -60,18 +91,88 @@ export default function ImportUnlabelledEndPostsCsv() {
               onChange={(e) => setVineyardID(e.target.value)}
               value={vineyardID}
             />
-            <div className="hidden sm:flex mx-1 self-stretch w-[1px] bg-border" />
-            <Button type="submit">Save</Button>
+            <input
+              type="text"
+              placeholder="Enter Vineyard Name"
+              className="border-2 p-1 rounded-sm"
+              onChange={(e) => setVineyardName(e.target.value)}
+              value={vineyardName}
+            />
+            <input
+              type="text"
+              placeholder="Enter Address"
+              className="border-2 p-1 rounded-sm"
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
+            />
+            <input
+              type="text"
+              placeholder="Enter Owner"
+              className="border-2 p-1 rounded-sm"
+              onChange={(e) => setOwner(e.target.value)}
+              value={owner}
+            />
+            <Button type="submit" className="px-4">
+              Save
+            </Button>
           </div>
         </form>
 
         <Separator className="my-2" />
 
-        <p>
-          To create a new vineyard a vineyard feature, with name, address owner
-          and a polygon with coordinates representing the boundary of the
-          vineyard must be created.
-        </p>
+        <div className="text-left flex flex-col gap-2">
+          <h2 className="font-bold underline">How to import CSV file</h2>
+          <p>
+            The CSV file needs to have columns labelled "Latitude", "Longitude"
+            and "Row", where "Row" is the row number. There should only be two
+            latitudes and longitudes for each row one for each end of the row.
+            E.g.
+          </p>
+          <Table className="border-1 text-xs">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Latitude</TableHead>
+                <TableHead>Longitude</TableHead>
+              </TableRow>
+              <TableRow>
+                <TableCell>53.26818842</TableCell>
+                <TableCell>-0.52427737</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>53.26803849</TableCell>
+                <TableCell>-0.52424047</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>53.26818842</TableCell>
+                <TableCell>-0.52431449</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>53.26803515</TableCell>
+                <TableCell>-0.52427742</TableCell>
+              </TableRow>
+            </TableHeader>
+          </Table>
+
+          <p>
+            Draw a polygon to represent a block around the end post points.
+            <br />
+            Click on the "Edit Properties" button and in each polygon click on
+            two points that represent the start and end of a row.
+            <br />
+            Click on the "Generate Lines" button to create lines between the
+            points.
+            <br />
+            Red circles are points that have not been joined.
+            <br />
+            Yellow circles are points that have been joined.
+            <br />
+            Click on the "Edit Properties" button to edit the properties of the
+            polygons.
+            <br />
+            Enter the vineyard data and click on the "Save" button to save the
+            data.
+          </p>
+        </div>
       </div>
     </main>
   );

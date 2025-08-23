@@ -15,6 +15,8 @@ const buttonVariants = cva(
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 cursor-pointer rounded",
         green:
           "bg-[#70B664] text-white shadow-xs hover:bg-[#5a9b52] focus-visible:ring-green-300 cursor-pointer rounded",
+        small:
+          "bg-gray-100 text-secondary-foreground shadow-xs hover:bg-gray-200 transition-all duration-300 cursor-pointer rounded text-xs",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
