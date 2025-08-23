@@ -48,10 +48,7 @@ export default function Home() {
           </ul>
           {page >= 1 && page <= 6 && (
             <>
-              <Separator
-                orientation="vertical"
-                className="mx-2 border-1 border-gray-400 h-full rounded-xl"
-              />
+              <div className="hidden sm:flex mx-1 self-stretch w-[2px] bg-border" />
               <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 w-full">
                 <MenuButton
                   page={1}
@@ -106,10 +103,7 @@ export default function Home() {
           )}
           {(page === 7 || page === 8) && (
             <>
-              <Separator
-                orientation="vertical"
-                className="mx-2 border-1 border-gray-400 h-full rounded-xl"
-              />
+              <div className="hidden sm:flex mx-1 self-stretch w-[2px] bg-border" />
               <ul className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 w-full">
                 <MenuButton
                   page={7}
