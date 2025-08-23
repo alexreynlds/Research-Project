@@ -52,7 +52,7 @@ export default function CreateMapPage() {
           onSubmit={saveVineyard}
         >
           <label className="text-sm text-gray-600">Vineyard ID:</label>
-          <div className="flex flex-row">
+          <div className="flex flex-row gap-3">
             <input
               type="text"
               placeholder="Enter Vineyard ID"

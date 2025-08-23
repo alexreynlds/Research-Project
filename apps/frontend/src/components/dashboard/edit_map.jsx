@@ -6,8 +6,15 @@ import { Map } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export default function CreateMapPage() {
+export default function EditMapPage() {
   const [vineyardID, setVineyardID] = useState("");
   const mapRef = useRef(null);
 
@@ -47,31 +54,30 @@ export default function CreateMapPage() {
 
         <Separator className="my-2" />
 
-        <form
-          className="flex flex-col sm:flex-row gap-2 justify-center items-center"
-          onSubmit={saveVineyard}
-        >
-          <label className="text-sm text-gray-600">Vineyard ID:</label>
-          <div className="flex flex-row">
-            <input
-              type="text"
-              placeholder="Enter Vineyard ID"
-              className="border-2 p-1 rounded-sm"
-              onChange={(e) => setVineyardID(e.target.value)}
-              value={vineyardID}
-            />
+        <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
+          <label className="text-sm text-gray-600">Select Vineyard</label>
+          <div className="flex flex-row gap-3">
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {/* Get all vineyards from backend here */}
+                <SelectItem>Placeholder</SelectItem>
+              </SelectContent>
+            </Select>
             <div className="hidden sm:flex mx-1 self-stretch w-[1px] bg-border" />
-            <Button type="submit">Save</Button>
+            <Button>View</Button>
           </div>
-        </form>
+        </div>
 
         <Separator className="my-2" />
 
-        <p>
-          To create a new vineyard a vineyard feature, with name, address owner
-          and a polygon with coordinates representing the boundary of the
-          vineyard must be created.
-        </p>
+        <div className="flex flex-col gap-2 sm:flex-row justify-center">
+          <Button>Download GeoJSON</Button>
+          <div className="hidden sm:flex mx-4 self-stretch w-[1px] bg-border" />
+          <Button>Save</Button>
+        </div>
       </div>
     </main>
   );

@@ -15,6 +15,8 @@ import ImportOutfieldsGeoJson from "@/components/dashboard/import/outfields_geoj
 import ImportShapefile from "@/components/dashboard/import/shapefile";
 
 import ViewPage from "@/components/dashboard/view";
+import EditMapPage from "@/components/dashboard/edit_map";
+
 import CreateMapPage from "@/components/dashboard/create_map";
 
 export default function Home() {
@@ -142,7 +144,7 @@ export default function Home() {
           {page === 5 && <ImportOutfieldsGeoJson />}
           {page === 6 && <ImportShapefile />}
           {page === 7 && <CreateMapPage />}
-          {page === 8 && <div>Edit Map</div>}
+          {page === 8 && <EditMapPage />}
         </div>
       </MainLayout>
     )
