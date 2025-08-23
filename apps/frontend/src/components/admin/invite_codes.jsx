@@ -100,7 +100,7 @@ export default function InviteCodesPage() {
   };
 
   const onDeleteCode = async (code) => {
-    if (!confirm(`Are you sure you want to delete code ${code}?`)) {
+    if (!confirm(`Are you sure you want to delete code "${code.code}"?`)) {
       return;
     }
 
