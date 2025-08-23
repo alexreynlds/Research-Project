@@ -1,77 +1,144 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
-import { Map } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableBody,
+  TableRow,
+} from "@/components/ui/table";
 
-export default function ImportOutfieldsGeojson() {
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+export default function ImportOutfieldsGeoJson() {
+  const fileRef = useRef(null);
+
+  // Vineyard Data
   const [vineyardID, setVineyardID] = useState("");
-  const mapRef = useRef(null);
 
-  function saveVineyard(e) {
-    e.preventDefault();
+  const [fileName, setFileName] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  function openPicker() {
+    fileRef.current && fileRef.current.click();
   }
 
-  useEffect(() => {
-    const mapContainer = document.getElementById("map");
-    if (!mapContainer) return;
+  async function uploadCsvToBackend(file, vineyardID) {}
 
-    const map = new Map({
-      container: mapContainer,
-      style: "mapbox://styles/mapbox/satellite-streets-v12",
-      center: [-0.9772342405497342, 51.59632509886086],
-      zoom: 17,
-      accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
-    });
+  const headers = ["Property", "Value Example"];
 
-    return () => {
-      if (map) {
-        map.remove();
-      }
-    };
-  }, []);
+  const rows = [
+    [
+      "Coordinates",
+      "[ [-2.567159445513686, 51.12813421066522], [-2.567435443658527, 51.127130069394276] ]",
+    ],
+    ["Row Number", "101"],
+    ["Plant Count", "76"],
+    ["Fruit", "Grape"],
+    ["Variety", "Pinot Noir"],
+    ["Year Planted", "2020"],
+    ["Growing System", "Trellis"],
+    ["Plant Separation", "1.5"],
+    ["Plant Separation Metric", "m"],
+    ["Retired", "False"],
+  ];
 
   return (
     <main className="min-h-full w-full">
-      <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
       <Separator className="my-2" />
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2 sm:flex-row justify-center">
-          <Button>Edit Properties</Button>
-          <div className="hidden sm:flex mx-4 self-stretch w-[1px] bg-border" />
-          <Button>Undo</Button>
+      <div className="flex flex-col gap-3 items-center">
+        <div className="flex flex-col gap-2 sm:flex-row justify-between">
+          <Input id="csv" type="file" className="w-[250px]" ref={fileRef} />
+          <Button className="flex-1">Upload</Button>
         </div>
 
         <Separator className="my-2" />
 
-        <form
-          className="flex flex-col sm:flex-row gap-2 justify-center items-center"
-          onSubmit={saveVineyard}
-        >
-          <label className="text-sm text-gray-600">Vineyard ID:</label>
-          <div className="flex flex-row">
-            <input
-              type="text"
-              placeholder="Enter Vineyard ID"
-              className="border-2 p-1 rounded-sm"
-              onChange={(e) => setVineyardID(e.target.value)}
-              value={vineyardID}
-            />
-            <div className="hidden sm:flex mx-1 self-stretch w-[1px] bg-border" />
-            <Button type="submit">Save</Button>
+        <form className="flex flex-col gap-2 justify-center items-center">
+          <div className="flex flex-row gap-2">
+            <Label className="text-sm text-gray-600">
+              Vineyard ID (must be unique):
+            </Label>
+            <div className="flex flex-col md:flex-row gap-2">
+              <input
+                type="text"
+                placeholder="Vineyard ID"
+                className="border-2 p-1 rounded-sm"
+                onChange={(e) => setVineyardID(e.target.value)}
+                value={vineyardID}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row gap-2">
+            <Label className="text-sm text-gray-600">
+              Block ID (must be unique)
+            </Label>
+            <div className="flex flex-col md:flex-row gap-2">
+              <input
+                type="text"
+                placeholder="Block ID"
+                className="border-2 p-1 rounded-sm"
+                onChange={(e) => setVineyardID(e.target.value)}
+                value={vineyardID}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row gap-2">
+            <Label className="text-sm text-gray-600">Block Name</Label>
+            <div className="flex flex-col md:flex-row gap-2">
+              <input
+                type="text"
+                placeholder="Block Name"
+                className="border-2 p-1 rounded-sm"
+                onChange={(e) => setVineyardID(e.target.value)}
+                value={vineyardID}
+              />
+            </div>
           </div>
         </form>
 
         <Separator className="my-2" />
 
-        <p>
-          To create a new vineyard a vineyard feature, with name, address owner
-          and a polygon with coordinates representing the boundary of the
-          vineyard must be created.
-        </p>
+        <div className="text-left flex flex-col gap-2">
+          <p>
+            Each GeoJSON feature must have coordinates.
+            <br />
+            Import row lines GeoJSON file of one block, with these variables.
+          </p>
+
+          <Table className="text-xs border-1">
+            <TableHeader>
+              <TableRow>
+                {headers.map((h) => (
+                  <TableHead key={h} className="whitespace-nowrap">
+                    {h}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {rows.map((row, idx) => (
+                <TableRow key={idx}>
+                  {row.map((cell, i) => (
+                    <TableCell
+                      key={`${idx}-${i}`}
+                      className="align-top whitespace-nowrap"
+                    >
+                      {cell || ""}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </main>
   );
