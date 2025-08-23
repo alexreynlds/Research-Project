@@ -129,7 +129,7 @@ export default function Home() {
             Welcome, {user.email}
           </p>
         </div>
-        <div className="border-2 w-full rounded-md relative flex-1 p-3 flex justify-center">
+        <div className="md:border-2 w-full rounded-md relative flex-1 p-3 flex justify-center">
           {page === 0 && <ViewPage />}
           {page === 1 && <ImportLabelledEndPostsCsv />}
           {page === 2 && <ImportUnlabelledEndPostsCsv />}

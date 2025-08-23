@@ -39,7 +39,7 @@ export default function Page() {
             <p className="font-bold underline">Welcome, {user.email}</p>
           </div>
         </div>
-        <div className="border-2 p-3 w-full h-full rounded-md">
+        <div className="md:border-2 p-3 w-full h-full rounded-md">
           {page === 0 && <UsersPage />}
           {page === 1 && <InviteCodesPage />}
           {page === 2 && <DeleteEntitiesPage />}
