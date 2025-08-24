@@ -10,6 +10,8 @@ import InviteCodesPage from "@/components/admin/invite_codes";
 import ApiKeysPage from "@/components/admin/api_keys";
 import DeleteEntitiesPage from "@/components/admin/delete_entities";
 
+import { FaExternalLinkAlt } from "react-icons/fa";
+
 export default function Page() {
   const { user } = useAuth();
   const [page, setPage] = useState(0);
@@ -31,8 +33,9 @@ export default function Page() {
             <MenuButton page={3} currentPage={page} onClick={() => setPage(3)}>
               GENERATE API KEYS
             </MenuButton>
-            <MenuButton page={4} currentPage={page} onClick={() => setPage(4)}>
-              ORION DATA VIEWER
+            <MenuButton href={`${process.env.NEXT_PUBLIC_ORION_BASE}`}>
+              ORION DATA VIEWER{" "}
+              <FaExternalLinkAlt className="inline mb-1 ml-1" />
             </MenuButton>
           </ul>
           <div>

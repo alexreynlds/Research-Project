@@ -2,8 +2,26 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { FaRegCopy } from "react-icons/fa";
 import { Button } from "../ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 function CodeRow({ code, onDeleteCode }) {
+  const [deleting, setDeleting] = useState(false);
+  const handleDeleteConfirmed = async () => {
+    setDeleting(true);
+    await onDeleteCode(code);
+    setDeleting(false);
+  };
+
   return (
     <div className="rounded-lg border p-4 bg-white/70 backdrop-blur h-fit">
       <div className="flex items-center justify-between gap-4">
@@ -26,13 +44,30 @@ function CodeRow({ code, onDeleteCode }) {
           </div>
         </div>
 
-        <Button
-          type="button"
-          variant="destructive"
-          onClick={() => onDeleteCode(code)}
-        >
-          Delete code
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button type="button" variant="destructive" disabled={deleting}>
+              Delete code
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete selected entities?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. It will permanently remove{" "}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleDeleteConfirmed}
+                disabled={deleting}
+              >
+                {deleting ? "Deleting…" : "Confirm Delete"}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );
@@ -88,12 +123,17 @@ export default function InviteCodesPage() {
         throw new Error("Failed to generate code");
       }
 
-      const codeJson = await response.json();
+      const payload = await response.json();
+      const value = payload?.invite_code;
 
-      const newCode = codeJson.code;
+      await fetchCodes();
 
-      fetchCodes();
-      toast.success(`Code ${newCode} generated successfully.`);
+      if (value) {
+        toast.success(`Code ${value} generated successfully.`);
+      } else {
+        console.warn("Unexpected create payload:", payload);
+        toast.success("Code generated.");
+      }
     } catch (error) {
       console.error("Error generating code:", error);
       toast.error("Failed to generate code.");
@@ -101,10 +141,6 @@ export default function InviteCodesPage() {
   };
 
   const onDeleteCode = async (code) => {
-    if (!confirm(`Are you sure you want to delete code "${code.code}"?`)) {
-      return;
-    }
-
     const prev = structuredClone(codes);
     setCodes(codes.filter((u) => u.id !== code.id));
 
@@ -121,7 +157,7 @@ export default function InviteCodesPage() {
       if (!response.ok) {
         throw new Error("Failed to delete code");
       }
-      toast.success(`Code ${code} deleted successfully.`);
+      toast.success(`Code "${code.code}" deleted successfully.`);
     } catch (error) {
       console.error("Error deleting code:", error);
       toast.error(`Failed to delete code ${code}.`);
@@ -133,9 +169,15 @@ export default function InviteCodesPage() {
     <div className="w-full h-full flex flex-col gap-4">
       <h2 className="text-3xl underline">Invite Codes</h2>
 
-      <div className="w-full h-fit border-1 rounded p-2 flex gap-2 justify-center items-center ">
-        <h3 className="">Generate new invite code:</h3>
-        <Button onClick={onGenerateCode}>Generate Code</Button>
+      <div className="w-full h-fit border-1 rounded p-2 flex flex-col gap-2 justify-center items-center ">
+        <div className="flex items-center gap-4">
+          <h3 className="">Generate new invite code:</h3>
+          <Button onClick={onGenerateCode}>Generate Code</Button>
+        </div>
+        <p className="text-sm">
+          <b>INFO:</b> All codes are one time use and will be consumed and
+          deleted upon use
+        </p>
       </div>
 
       {loading ? (

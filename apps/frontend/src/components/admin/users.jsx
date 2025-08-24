@@ -1,6 +1,17 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 function UserRow({
   user,
@@ -10,6 +21,7 @@ function UserRow({
   onDeleteUser,
 }) {
   const [selected, setSelected] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   return (
     <div className="rounded-lg border p-4 bg-white/70 backdrop-blur mb-4">
@@ -21,9 +33,34 @@ function UserRow({
           </div>
         </div>
 
-        <Button variant="destructive" onClick={() => onDeleteUser(user)}>
-          Delete user
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button type="button" variant="destructive" disabled={deleting}>
+              Delete user
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete selected user?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. It will permanently remove{" "}
+                <b>{user.email}</b>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => {
+                  setDeleting(true);
+                  onDeleteUser(user);
+                }}
+                disabled={deleting}
+              >
+                {deleting ? "Deleting…" : "Confirm Delete"}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
 
       <div className="mt-3">
@@ -108,10 +145,6 @@ export default function UsersPage() {
   }, []);
 
   const onDeleteUser = async (user) => {
-    if (!confirm(`Are you sure you want to delete user ${user.email}?`)) {
-      return;
-    }
-
     if (user.role === "admin") {
       toast.error("You cannot delete an admin user.");
       return;

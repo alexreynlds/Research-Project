@@ -6,10 +6,12 @@ import random
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 
 
+# Helper function to generate a random alphanumeric code for invite codes
 def generate_code(length=12):
     return "".join(random.choices(string.ascii_letters + string.digits, k=length))
 
 
+# Entrypoint to get all users
 @admin_bp.route("/users", methods=["GET"])
 def get_users():
     db = get_db()
@@ -27,6 +29,7 @@ def get_users():
     return jsonify({"users": users})
 
 
+# Entrypoint to delete a user by ID
 @admin_bp.delete("/users/<int:user_id>")
 def delete_user(user_id: int):
     db = get_db()
@@ -43,6 +46,7 @@ def delete_user(user_id: int):
     return jsonify({"message": "User deleted successfully"}), 200
 
 
+# Entrypoint to generate a new invite code
 @admin_bp.post("/invite_codes")
 def generate_invite_code():
     db = get_db()
@@ -56,6 +60,7 @@ def generate_invite_code():
         return jsonify({"error": "Failed to generate invite code"}), 500
 
 
+# Entrypoint to list all invite codes
 @admin_bp.get("/invite_codes")
 def list_invite_codes():
     db = get_db()
@@ -67,6 +72,7 @@ def list_invite_codes():
     return jsonify({"codes": codes}), 200
 
 
+# Entrypoint to delete an invite code by ID
 @admin_bp.delete("/invite_codes/<int:code_id>")
 def delete_invite_code(code_id: int):
     db = get_db()
@@ -80,6 +86,7 @@ def delete_invite_code(code_id: int):
     return jsonify({"message": "Invite code deleted successfully"}), 200
 
 
+# Entrypoint to check if an invite code exists (used for registration)
 @admin_bp.get("/invite_codes/<string:code>")
 def check_invite_code(code: str):
     db = get_db()

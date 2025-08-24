@@ -3,14 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableCaption,
-  TableFooter,
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -34,7 +33,6 @@ export default function DeleteEntitiesPage() {
   const [filter, setFilter] = useState("");
 
   // Fetch entities
-  // TODO: Add functionality to this in the backend
   useEffect(() => {
     let cancelled = false;
     async function fetchEntities() {
@@ -99,17 +97,24 @@ export default function DeleteEntitiesPage() {
     if (selected.size === 0) return;
     setDeleting(true);
     try {
-      const res = await fetch(`${BASE_URL}/api/v1/entities`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ ids: Array.from(selected) }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/v1/entities`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ entity_ids: Array.from(selected) }),
+        },
+      );
+
+      console.log(JSON.stringify({ entity_ids: Array.from(selected) }));
+
       if (!res.ok) throw new Error(await res.text());
 
       const remaining = entities.filter((e) => !selected.has(e.id));
       setEntities(remaining);
       setSelected(new Set());
+      toast.success(`Deleted ${selectedCount} entities.`);
     } catch (e) {
       console.error("Delete failed:", e);
       alert(e.message || "Delete failed");
