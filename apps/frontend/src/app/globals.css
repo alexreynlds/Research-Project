@@ -41,6 +41,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --color-brand-green: #70b644;
+  --color-brand-darkGreen: #5a9b52;
 }
 
 @media (prefers-color-scheme: light) {

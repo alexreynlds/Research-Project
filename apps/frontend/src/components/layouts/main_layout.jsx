@@ -7,9 +7,10 @@ import Footer from "./footer";
 export default function MainLayout({ pageTitle, children }) {
   return (
     <main className="flex flex-col w-full h-full items-center gap-5">
-      <div className="flex flex-col min-h-screen gap-5 w-full md:max-w-[1400px] md:w-[90%] items-center relative">
+      <div className="flex flex-col min-h-screen md:gap-5 w-full md:max-w-[1400px] md:w-[90%] items-center relative">
         <DesktopNavbar pageTitle={pageTitle} />
         <MobileNav />
+        <div className="h-[72px] md:hidden" />
         {children}
       </div>
       <Toaster />

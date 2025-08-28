@@ -167,7 +167,7 @@ export default function InviteCodesPage() {
 
   return (
     <div className="w-full h-full flex flex-col gap-4">
-      <h2 className="text-3xl underline">Invite Codes</h2>
+      <h1 className="text-3xl mb-3 underline">Invite Codes</h1>
 
       <div className="w-full h-fit border-1 rounded p-2 flex flex-col gap-2 justify-center items-center ">
         <div className="flex items-center gap-4">

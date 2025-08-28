@@ -26,7 +26,38 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export default function DeleteEntitiesPage() {
-  const [entities, setEntities] = useState([]);
+  // const [entities, setEntities] = useState([]);
+  // Defining entities with some example ones, do this via API in future
+  const [entities, setEntities] = useState([
+    {
+      id: "entity-001",
+      type: "Vineyard",
+      vineyard_id: "vineyard-001",
+      name: "Sunny Acres",
+      user_defined_id: "SA-01",
+    },
+    {
+      id: "entity-002",
+      type: "VineRow",
+      vineyard_id: "vineyard-001",
+      name: "Row 1",
+      user_defined_id: "VR-01",
+    },
+    {
+      id: "entity-003",
+      type: "Vine",
+      vineyard_id: "vineyard-001",
+      name: "Pinot Noir Vine 1",
+      user_defined_id: "V-001",
+    },
+    {
+      id: "entity-004",
+      type: "Vine",
+      vineyard_id: "vineyard-001",
+      name: "Pinot Noir Vine 2",
+      user_defined_id: "V-002",
+    },
+  ]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [selected, setSelected] = useState(() => new Set());
@@ -39,7 +70,7 @@ export default function DeleteEntitiesPage() {
       setLoading(true);
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE}/api/v1/entities`,
+          `${process.env.NEXT_PUBLIC_API_BASE}/api/entities`,
           {
             credentials: "include",
           },
@@ -98,7 +129,7 @@ export default function DeleteEntitiesPage() {
     setDeleting(true);
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/v1/entities`,
+        `${process.env.NEXT_PUBLIC_API_BASE}/api/entities`,
         {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -124,8 +155,8 @@ export default function DeleteEntitiesPage() {
   }
 
   return (
-    <main className="w-full max-w-5xl mx-auto p-4">
-      <h1 className="text-2xl font-semibold mb-3">Delete Entity</h1>
+    <main className="w-full mx-auto">
+      <h1 className="text-3xl mb-3 underline">Delete Entity</h1>
 
       <div className="flex flex-col sm:flex-row items-center gap-2 mb-3">
         {/* Search box */}
@@ -141,7 +172,7 @@ export default function DeleteEntitiesPage() {
             <Button
               variant="destructive"
               disabled={selected.size === 0 || deleting}
-              className="ml-auto"
+              className="ml-auto w-full md:w-auto"
             >
               Delete Selected Entities
               {selectedCount ? ` (${selectedCount})` : ""}

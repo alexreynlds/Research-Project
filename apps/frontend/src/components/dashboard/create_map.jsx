@@ -3,9 +3,13 @@
 import { useRef, useEffect, useState } from "react";
 
 import { Map } from "mapbox-gl";
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
+
+import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import MobilePageTitle from "../layouts/mobile_page_title";
 
 export default function CreateMapPage() {
   const [vineyardID, setVineyardID] = useState("");
@@ -27,6 +31,23 @@ export default function CreateMapPage() {
       accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
     });
 
+    map.addControl(new mapboxgl.NavigationControl());
+
+    var draw = new MapboxDraw({
+      displayControlsDefault: false,
+      controls: {
+        polygon: true,
+        line_string: true,
+        point: true,
+        trash: true,
+        combine_features: false,
+        uncombine_features: false,
+        direct_select: true,
+      },
+    });
+
+    map.addControl(draw);
+
     return () => {
       if (map) {
         map.remove();
@@ -36,6 +57,7 @@ export default function CreateMapPage() {
 
   return (
     <main className="min-h-full w-full">
+      <MobilePageTitle>Create Vineyard</MobilePageTitle>
       <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
       <Separator className="my-2" />
       <div className="flex flex-col gap-2">

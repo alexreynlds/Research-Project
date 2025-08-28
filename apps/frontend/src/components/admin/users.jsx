@@ -13,11 +13,30 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+function VineyardChip({ vineyard, onRemove }) {
+  return (
+    <div className="bg-gray-200 text-gray-800 px-2 py-1 rounded-full text-sm flex items-center gap-2 mr-2 mb-2">
+      <span>
+        {vineyard.name} ({vineyard.type})
+      </span>
+      {onRemove && (
+        <button
+          onClick={onRemove}
+          className="text-red-500 hover:text-red-700 font-bold cursor-pointer"
+          title="Remove vineyard from user"
+        >
+          &times;
+        </button>
+      )}
+    </div>
+  );
+}
+
 function UserRow({
   user,
-  // vineyards,
-  // onAddVineyard,
-  // onRemoveVineyard,
+  vineyards,
+  onAddVineyard,
+  onRemoveVineyard,
   onDeleteUser,
 }) {
   const [selected, setSelected] = useState("");
@@ -64,55 +83,93 @@ function UserRow({
       </div>
 
       <div className="mt-3">
-        {/* <div className="text-sm font-medium mb-1 underline">Vineyards</div> */}
-        {/* <div className="flex flex-wrap"> */}
-        {/*   {user.vineyards?.length ? ( */}
-        {/*     user.vineyards.map((vineyard) => ( */}
-        {/*       <VineyardChip */}
-        {/*         key={vineyard.id} */}
-        {/*         vineyard={vineyard} */}
-        {/*         onRemove={() => onRemoveVineyard(user, vineyard)} */}
-        {/*       /> */}
-        {/*     )) */}
-        {/*   ) : ( */}
-        {/*     <span className="text-sm text-gray-500">No vineyards</span> */}
-        {/*   )} */}
-        {/* </div> */}
+        <div className="text-sm font-medium mb-1 underline">Vineyards</div>
+        <div className="flex flex-wrap">
+          {user.vineyards?.length ? (
+            user.vineyards.map((vineyard) => (
+              <VineyardChip
+                key={vineyard.id}
+                vineyard={vineyard}
+                onRemove={() => onRemoveVineyard(user, vineyard.id)}
+              />
+            ))
+          ) : (
+            <span className="text-sm text-gray-500">No vineyards</span>
+          )}
+        </div>
       </div>
 
-      {/* <div className="mt-3 flex items-center gap-2 flex-col md:flex-row"> */}
-      {/*   <select */}
-      {/*     className="border rounded px-2 py-1" */}
-      {/*     value={selected} */}
-      {/*     onChange={(e) => setSelected(e.target.value)} */}
-      {/*   > */}
-      {/*     <option value="">Select a vineyard…</option> */}
-      {/*     {vineyards.map((v) => ( */}
-      {/*       <option key={v.id} value={v.id}> */}
-      {/*         {v.name} — {v.type} */}
-      {/*       </option> */}
-      {/*     ))} */}
-      {/*   </select> */}
-      {/*   <button */}
-      {/*     type="button" */}
-      {/*     disabled={!selected} */}
-      {/*     onClick={() => { */}
-      {/*       if (!selected) return; */}
-      {/*       onAddVineyard(user, selected); */}
-      {/*       setSelected(""); */}
-      {/*     }} */}
-      {/*     className="border px-3 py-1 rounded hover:bg-gray-50 disabled:opacity-50" */}
-      {/*   > */}
-      {/*     Add to user */}
-      {/*   </button> */}
-      {/* </div> */}
+      <div className="mt-3 flex items-center gap-2 flex-col md:flex-row">
+        <select
+          className="border rounded px-2 py-1"
+          value={selected}
+          onChange={(e) => setSelected(e.target.value)}
+        >
+          <option value="">Select a vineyard…</option>
+          {vineyards.map((v) => (
+            <option key={v.id} value={v.id}>
+              {v.name} — {v.type}
+            </option>
+          ))}
+        </select>
+        <button
+          type="button"
+          disabled={!selected}
+          onClick={() => {
+            if (!selected) return;
+            onAddVineyard(user, selected);
+            setSelected("");
+          }}
+          className="border px-3 py-1 rounded hover:bg-gray-50 disabled:opacity-50"
+        >
+          Add to user
+        </button>
+      </div>
     </div>
   );
 }
 
 export default function UsersPage() {
+  // In the future, fetch this from the API
+  const [vineyards, setVineyards] = useState([
+    { id: "1", name: "Sunny Acres", type: "Estate" },
+    { id: "2", name: "Riverbend", type: "Estate" },
+    { id: "3", name: "Hilltop", type: "Contract" },
+    { id: "4", name: "Valley View", type: "Contract" },
+  ]);
+
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
+
+  // In the future, these should be API calls to update the user
+  const onAddVineyard = async (user, vineyardId) => {
+    const vineyard = vineyards.find((v) => v.id === vineyardId);
+    if (!vineyard) return;
+    if (user.vineyards?.some((v) => v.id === vineyardId)) {
+      toast.error("User already has this vineyard.");
+      return;
+    }
+    setUsers(
+      users.map((u) =>
+        u.id === user.id
+          ? { ...u, vineyards: [...(u.vineyards || []), vineyard] }
+          : u,
+      ),
+    );
+  };
+
+  const onRemoveVineyard = (user, vineyardId) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((u) =>
+        u.id === user.id
+          ? {
+              ...u,
+              vineyards: (u.vineyards || []).filter((v) => v.id !== vineyardId),
+            }
+          : u,
+      ),
+    );
+  };
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -176,7 +233,7 @@ export default function UsersPage() {
 
   return (
     <div className="w-full h-full">
-      <h2 className="text-3xl mb-3 underline">Users List</h2>
+      <h1 className="text-3xl mb-3 underline">Users List</h1>
 
       {loading ? (
         <p>loading users...</p>
@@ -186,9 +243,9 @@ export default function UsersPage() {
             key={user.id}
             user={user}
             onDeleteUser={onDeleteUser}
-            // vineyards={vineyards}
-            // onAddVineyard={onAddVineyard}
-            // onRemoveVineyard={onRemoveVineyard}
+            vineyards={vineyards}
+            onAddVineyard={onAddVineyard}
+            onRemoveVineyard={onRemoveVineyard}
           />
         ))
       ) : (

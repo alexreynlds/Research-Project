@@ -1,6 +1,7 @@
 import { JetBrains_Mono } from "next/font/google";
 import { AuthProvider } from "@/components/auth/auth_context";
 import { Toaster } from "sonner";
+import ScrollToTopButton from "@/components/layouts/scroll_to_top_button";
 import "./globals.css";
 
 const jetbrains = JetBrains_Mono({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
       <body className={`${jetbrains.className} antialiased`}>
         <AuthProvider>{children}</AuthProvider>
         <Toaster />
+        <ScrollToTopButton />
       </body>
     </html>
   );

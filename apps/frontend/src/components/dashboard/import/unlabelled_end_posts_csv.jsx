@@ -19,6 +19,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import MobilePageTitle from "@/components/layouts/mobile_page_title";
 
 export default function ImportUnlabelledEndPostsCsv() {
   const fileRef = useRef(null);
@@ -29,8 +30,6 @@ export default function ImportUnlabelledEndPostsCsv() {
   const [address, setAddress] = useState("");
   const [owner, setOwner] = useState("");
 
-  const [fileName, setFileName] = useState("");
-  const [busy, setBusy] = useState(false);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -52,21 +51,17 @@ export default function ImportUnlabelledEndPostsCsv() {
     };
   }, []);
 
-  function openPicker() {
-    fileRef.current && fileRef.current.click();
-  }
-
-  async function uploadCsvToBackend(file, vineyardID) {}
-
   return (
     <main className="min-h-full w-full">
+      <MobilePageTitle>Import Unlabelled End Posts CSV</MobilePageTitle>
       <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
       <Separator className="my-2" />
       <div className="flex flex-col gap-3 items-center">
-        <div className="flex flex-col gap-2">
+        {/* file uploda and buttons */}
+        <div className="flex flex-col gap-2 w-full md:w-auto">
           <div className="flex flex-col gap-2 sm:flex-row justify-between">
             <Input id="csv" type="file" className="flex-1" ref={fileRef} />
-            <Button className="max-w-[30%] flex-1">Upload</Button>
+            <Button className="md:max-w-[30%] flex-1">Upload</Button>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row justify-center">
             <Button>Edit Properties</Button>
@@ -81,9 +76,10 @@ export default function ImportUnlabelledEndPostsCsv() {
 
         <Separator className="my-2" />
 
-        <form className="flex flex-col  gap-2 justify-center items-center">
+        {/* Vineyard data input */}
+        <form className="flex flex-col  gap-2 justify-center items-center w-full md:w-auto">
           <Label className="text-sm text-gray-600">Vineyard Data:</Label>
-          <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-col md:flex-row gap-2 w-full">
             <input
               type="text"
               placeholder="Enter Vineyard ID"

@@ -8,6 +8,7 @@ from db import init_db, close_db
 from auth import auth_bp
 from admin.admin import admin_bp
 from admin.entities import entities_bp
+from admin.orion_viewer import viewer_bp
 from api import api_bp
 
 
@@ -45,8 +46,10 @@ def create_app():
     app.register_blueprint(admin_bp)
     app.register_blueprint(api_bp)
     app.register_blueprint(entities_bp)
+    app.register_blueprint(viewer_bp)
 
     # Small health check endpoint
+
     @app.get("/health")
     def health():
         return {"ok": True}

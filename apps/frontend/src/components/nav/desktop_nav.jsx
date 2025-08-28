@@ -22,16 +22,21 @@ export default function DesktopNavbar({ pageTitle = "" }) {
         Agrids Map - {pageTitle}
       </h1>
       <ul className="flex gap-2 text-lg font-medium items-center">
-        <NavbarButton href="/">Home</NavbarButton>
-        {/* <NavbarButton href="#view">View Vineyard</NavbarButton> */}
-        {/* <NavbarButton href="/import">Import</NavbarButton> */}
-        {/* <NavbarButton href="/create">Create</NavbarButton> */}
-        {/* <NavbarButton href="/robotics">Robotics</NavbarButton> */}
-        {/* <NavbarButton href="/admin">Admin Development</NavbarButton> */}
+        <li>
+          <NavbarButton href="/" name="Home">
+            Home
+          </NavbarButton>
+        </li>
         {user && user.role === "admin" && (
-          <NavbarButton href="/admin">Admin</NavbarButton>
+          <li>
+            <NavbarButton href="/admin" name="Admin Dashboard">
+              Admin
+            </NavbarButton>
+          </li>
         )}
-        <LogoutButton />
+        <li>
+          <LogoutButton />
+        </li>
       </ul>
     </nav>
   );

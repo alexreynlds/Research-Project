@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import MobilePageTitle from "../layouts/mobile_page_title";
 
 export default function EditMapPage() {
   const [vineyardID, setVineyardID] = useState("");
@@ -43,6 +44,7 @@ export default function EditMapPage() {
 
   return (
     <main className="min-h-full w-full">
+      <MobilePageTitle>Edit Vineyard</MobilePageTitle>
       <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
       <Separator className="my-2" />
       <div className="flex flex-col gap-2">

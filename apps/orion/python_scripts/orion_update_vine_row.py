@@ -1,25 +1,21 @@
 import requests
 import json
 
-ORION_ENDPOINT_BASE = 'http://localhost:1026/v2/entities/'
+ORION_ENDPOINT_BASE = "http://localhost:1027/v2/entities/"
 
 # Vine entity ID
-entity_id = '0827ece3-d0ba-4059-becf-5a227c90a9a1'
+entity_id = "0827ece3-d0ba-4059-becf-5a227c90a9a1"
 
-ORION_ENDPOINT = f'{ORION_ENDPOINT_BASE}{entity_id}/attrs' # may or may not need "/attrs" at the end
+# may or may not need "/attrs" at the end
+ORION_ENDPOINT = f"{ORION_ENDPOINT_BASE}{entity_id}/attrs"
 
-updated_data = {
-    "user_defined_id": {
-        "value": "fr8",
-        "type": "String"
-    }
-}
+updated_data = {"user_defined_id": {"value": "fr8", "type": "String"}}
 
 # Convert updated data to JSON
 updated_vine_json = json.dumps(updated_data)
 
 # Headers for JSON content
-headers = {'Content-Type': 'application/json'}
+headers = {"Content-Type": "application/json"}
 
 # Update Vine entity in Orion using PATCH request
 response = requests.patch(ORION_ENDPOINT, data=updated_vine_json, headers=headers)
@@ -32,14 +28,14 @@ else:
     print("Response:", response.text)
 
 # send notifcation
-#notification_endpoint = 'http://localhost:5080/notify'
+# notification_endpoint = 'http://localhost:5080/notify'
 
 # Send POST request to the notification endpoint
-#response = requests.post(notification_endpoint, data=updated_vine_json, headers=headers)
+# response = requests.post(notification_endpoint, data=updated_vine_json, headers=headers)
 
 # Print response
-#if response.status_code == 200:
+# if response.status_code == 200:
 #    print("Notification sent successfully")
-#else:
+# else:
 #    print("Failed to send notification. Status code:", response.status_code)
 #    print("Response:", response.text)

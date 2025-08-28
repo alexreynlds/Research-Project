@@ -37,7 +37,7 @@ export default function MenuButton({
   if (variant === "default") {
     return (
       <Button
-        className={`text-white flex items-center justify-center font-bold px-2 py-1 hover:scale-105 transition-all duration-300 rounded cursor-pointer ${isActive ? "bg-blue-300 hover:bg-blue-500" : "bg-green-300 hover:bg-green-500"}`}
+        className={`text-white flex items-center justify-center font-bold px-2 py-1 hover:scale-105 transition-all duration-300 rounded cursor-pointer ${isActive ? "bg-blue-300 hover:bg-blue-400" : "bg-green-300 hover:bg-green-400"}`}
         onClick={onClick}
       >
         {children}
@@ -48,7 +48,7 @@ export default function MenuButton({
   if (variant === "small") {
     return (
       <button
-        className={`text-white flex items-center justify-center text-sm font-bold px-1 py-1 hover:scale-103 transition-all duration-300 rounded cursor-pointer ${isActive ? "bg-blue-300" : "bg-green-300 hover:bg-green-500"}`}
+        className={`text-white flex items-center justify-center text-sm font-bold px-1 py-1 hover:scale-103 transition-all duration-300 rounded cursor-pointer ${isActive ? "bg-blue-300" : "bg-green-300 hover:bg-green-400"}`}
         onClick={onClick}
       >
         {children}

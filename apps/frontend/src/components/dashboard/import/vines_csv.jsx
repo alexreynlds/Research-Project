@@ -19,6 +19,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import MobilePageTitle from "@/components/layouts/mobile_page_title";
 
 export default function ImportVinesCsv() {
   const fileRef = useRef(null);
@@ -29,8 +30,6 @@ export default function ImportVinesCsv() {
   const [address, setAddress] = useState("");
   const [owner, setOwner] = useState("");
 
-  const [fileName, setFileName] = useState("");
-  const [busy, setBusy] = useState(false);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -60,12 +59,19 @@ export default function ImportVinesCsv() {
 
   return (
     <main className="min-h-full w-full">
+      <MobilePageTitle>Import Vines from CSV</MobilePageTitle>
       <div id="map" className="w-full h-[600px] rounded" ref={mapRef} />
       <Separator className="my-2" />
       <div className="flex flex-col gap-3 items-center">
-        <div className="flex flex-col gap-2">
+        {/* File Input and buttons */}
+        <div className="flex flex-col gap-2 w-full md:w-auto">
           <div className="flex flex-col gap-2 sm:flex-row justify-between">
-            <Input id="csv" type="file" className="w-[250px]" ref={fileRef} />
+            <Input
+              id="csv"
+              type="file"
+              className="md:w-[250px]"
+              ref={fileRef}
+            />
             <Button className="flex-1">Upload</Button>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row justify-center">
@@ -79,9 +85,10 @@ export default function ImportVinesCsv() {
 
         <Separator className="my-2" />
 
-        <form className="flex flex-col  gap-2 justify-center items-center">
+        {/* Vineyard data input */}
+        <form className="flex flex-col  gap-2 justify-center items-center w-full md:w-auto">
           <Label className="text-sm text-gray-600">Vineyard Data:</Label>
-          <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-col md:flex-row gap-2 w-full">
             <input
               type="text"
               placeholder="Enter Vineyard ID"
@@ -118,6 +125,7 @@ export default function ImportVinesCsv() {
 
         <Separator className="my-2" />
 
+        {/* Fix the overflow issue with this table at somepoint */}
         <div className="text-left flex flex-col gap-2">
           <h2 className="font-bold underline">How to import CSV file</h2>
           <p>

@@ -30,7 +30,6 @@ export default function Page() {
     }
   };
 
-  //TODO: ADD EMAIL VALIDATION
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
@@ -38,6 +37,12 @@ export default function Page() {
     // Require matching passwords
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
+      return;
+    }
+
+    // Require minimum password length
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
       return;
     }
 
@@ -76,6 +81,9 @@ export default function Page() {
     }
 
     toast.success("Registration successful! You can now log in.");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
     setPage(0);
   };
 
@@ -86,7 +94,7 @@ export default function Page() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 relative">
       <div className="bg-[url(/img/field.jpg)] bg-cover blur-xs w-full h-full absolute" />
-      <main className="flex flex-col gap-[24px] row-start-2 items-center  w-[25%] min-w-[350px] h-[100%] rounded-xl p-4 shadow-xl z-10 bg-white/70 backdrop-blur-md">
+      <main className="flex flex-col gap-[24px] row-start-2 items-center  w-[25%] min-w-[375px] h-[100%] rounded-xl p-4 shadow-xl z-10 bg-white/70 backdrop-blur-md">
         <img
           src="/img/agrids_logo_transparent_crop.png"
           alt="agrids logo"
@@ -117,17 +125,6 @@ export default function Page() {
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 />
-                <div className="flex items-center justify-between mt-2 mb-4">
-                  {/* <div className="flex items-center"> */}
-                  {/*   <input type="checkbox" id="remember" className="mr-2" /> */}
-                  {/*   <label htmlFor="remember" className="text-sm text-gray-600"> */}
-                  {/*     Remember me */}
-                  {/*   </label> */}
-                  {/* </div> */}
-                  <a href="#" className="text-sm text-blue-600 hover:underline">
-                    Forgot password?
-                  </a>
-                </div>
                 <button
                   type="submit"
                   className="bg-[#70b664] py-1 px-4 rounded-sm text-white hover:bg-[#5a9b52] transition-colors duration-300 cursor-pointer"
@@ -201,7 +198,7 @@ export default function Page() {
                       onClick={handleCardChange}
                       className="text-gray-800 font-bold hover:underline hover:text-blue-600 cursor-pointer"
                     >
-                      Login instead!
+                      Login instead
                     </a>
                   </span>
                 </div>

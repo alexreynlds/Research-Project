@@ -16,21 +16,13 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import MobilePageTitle from "@/components/layouts/mobile_page_title";
 
 export default function ImportGeoJson() {
   const fileRef = useRef(null);
 
   // Vineyard Data
   const [vineyardID, setVineyardID] = useState("");
-
-  const [fileName, setFileName] = useState("");
-  const [busy, setBusy] = useState(false);
-
-  function openPicker() {
-    fileRef.current && fileRef.current.click();
-  }
-
-  async function uploadCsvToBackend(file, vineyardID) {}
 
   const headers = [
     "Vineyard",
@@ -151,10 +143,12 @@ export default function ImportGeoJson() {
 
   return (
     <main className="min-h-full w-full">
+      <MobilePageTitle>Import GeoJSON</MobilePageTitle>
       <Separator className="my-2" />
       <div className="flex flex-col gap-3 items-center">
-        <div className="flex flex-col gap-2 sm:flex-row justify-between">
-          <Input id="csv" type="file" className="w-[250px]" ref={fileRef} />
+        {/* File Input */}
+        <div className="flex flex-col gap-2 sm:flex-row justify-between w-full md:w-auto">
+          <Input id="csv" type="file" className="md:w-[250px]" ref={fileRef} />
           <Button className="flex-1">Upload</Button>
         </div>
 

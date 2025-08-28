@@ -13,6 +13,7 @@ import {
   TableBody,
   TableRow,
 } from "@/components/ui/table";
+import MobilePageTitle from "@/components/layouts/mobile_page_title";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,17 +23,6 @@ export default function ImportOutfieldsGeoJson() {
 
   // Vineyard Data
   const [vineyardID, setVineyardID] = useState("");
-
-  const [fileName, setFileName] = useState("");
-  const [busy, setBusy] = useState(false);
-
-  function openPicker() {
-    fileRef.current && fileRef.current.click();
-  }
-
-  async function uploadCsvToBackend(file, vineyardID) {}
-
-  const headers = ["Property", "Value Example"];
 
   const rows = [
     [
@@ -52,10 +42,12 @@ export default function ImportOutfieldsGeoJson() {
 
   return (
     <main className="min-h-full w-full">
-      <Separator className="my-2" />
+      <MobilePageTitle>Import Outfields GeoJSON</MobilePageTitle>
+      <Separator className="my-2 flex md:hidden" />
       <div className="flex flex-col gap-3 items-center">
-        <div className="flex flex-col gap-2 sm:flex-row justify-between">
-          <Input id="csv" type="file" className="w-[250px]" ref={fileRef} />
+        {/* File Input */}
+        <div className="flex flex-col gap-2 sm:flex-row justify-between w-full md:w-auto">
+          <Input id="csv" type="file" className="md:w-[250px]" ref={fileRef} />
           <Button className="flex-1">Upload</Button>
         </div>
 
@@ -113,28 +105,31 @@ export default function ImportOutfieldsGeoJson() {
             Import row lines GeoJSON file of one block, with these variables.
           </p>
 
-          <div className="border rounded-md overflow-hidden">
-            <Table className="text-xs">
+          <div className="w-full max-w-full overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <Table className="w-full table-fixed text-xs">
               <TableHeader className="bg-muted/40">
                 <TableRow>
-                  {headers.map((h) => (
-                    <TableHead key={h} className="whitespace-nowrap">
-                      {h}
-                    </TableHead>
-                  ))}
+                  <TableHead className="w-36 md:w-48 whitespace-nowrap">
+                    Property
+                  </TableHead>
+                  <TableHead>Value Example</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {rows.map((row, idx) => (
                   <TableRow key={idx}>
-                    {row.map((cell, i) => (
-                      <TableCell
-                        key={`${idx}-${i}`}
-                        className="align-top whitespace-nowrap"
-                      >
-                        {cell || ""}
-                      </TableCell>
-                    ))}
+                    {/* Property */}
+                    <TableCell className="align-top whitespace-nowrap">
+                      {row[0]}
+                    </TableCell>
+
+                    {/* Value */}
+                    <TableCell className="align-top min-w-0 whitespace-pre-wrap break-all leading-snug">
+                      {/* wrapping helper to ensure the style applies even if shadcn TableCell sets display: table-cell */}
+                      <span className="block min-w-0 break-all">
+                        {row[1] || ""}
+                      </span>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

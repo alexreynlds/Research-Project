@@ -1,8 +1,9 @@
 import requests
 
+
 def delete_all_entities():
     # Define the Fiware Orion URL for querying all entities
-    orion_url = "http://localhost:1026/v2/entities/"
+    orion_url = "http://localhost:1027/v2/entities/"
 
     # Query all entities
     try:
@@ -18,9 +19,10 @@ def delete_all_entities():
     except Exception as e:
         print(f"Error querying entities: {str(e)}")
 
+
 def delete_entity(entity_id):
     # Define the Fiware Orion URL and entity ID
-    orion_url = "http://localhost:1026/v2/entities/"
+    orion_url = "http://localhost:1027/v2/entities/"
     entity_url = orion_url + entity_id
 
     # Use requests to send the DELETE request
@@ -29,9 +31,14 @@ def delete_entity(entity_id):
         if response.status_code == 204:
             print(f"Entity {entity_id} deleted successfully.")
         else:
-            print(f"Error deleting entity {entity_id}. Status code: {response.status_code}")
+            print(
+                f"Error deleting entity {entity_id}. Status code: {
+                    response.status_code
+                }"
+            )
     except Exception as e:
         print(f"Error deleting entity {entity_id}: {str(e)}")
+
 
 # Call delete_all_entities function to delete all entities
 delete_all_entities()
